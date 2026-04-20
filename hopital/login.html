@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Connexion - Nouvel Hôpital</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <header class="navbar">
+  <div class="container nav-container">
+    <a href="index.html" class="logo">
+      <img src="images/logo.png" alt="Logo Nouvel Hôpital">
+    </a>
+
+    <nav class="nav-links">
+      <a href="index.html#about">À propos</a>
+      <a href="index.html#services">Services</a>
+      <a href="index.html#news">Actualités</a>
+      <a href="index.html#resources">Ressources</a>
+    </nav>
+
+    <div class="nav-actions">
+      <a href="login.html" class="btn btn-light">Connexion</a>
+      <a href="register.html" class="btn btn-primary">Inscription</a>
+    </div>
+  </div>
+</header>
+
+  <main class="auth-page">
+    <div class="container auth-grid">
+      <section class="auth-side">
+        <span class="tag">Accès plateforme</span>
+        <h1>Connexion</h1>
+        <p>
+          Connectez-vous pour accéder à votre espace personnel, à votre profil,
+          à votre niveau et aux services liés à la plateforme.
+        </p>
+      </section>
+
+      <section class="auth-card">
+        <h2>Se connecter</h2>
+        <form class="auth-form">
+          <label for="login">Login</label>
+          <input id="login" type="text" placeholder="Votre login" />
+
+          <label for="password">Mot de passe</label>
+          <input id="password" type="password" placeholder="Votre mot de passe" />
+
+          <button class="btn btn-primary" type="submit">Connexion</button>
+        </form>
+
+        <p class="auth-bottom">
+          Vous n’avez pas encore de compte ?
+          <a href="register.html">Inscrivez-vous</a>
+        </p>
+      </section>
+    </div>
+  </main>
+
+</body>
+</html>
