@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Administration - Nouvel Hôpital</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<header class="navbar">
+  <div class="container nav-container">
+    <a href="index.html" class="logo">
+      <img src="images/logo.png" alt="Logo Nouvel Hôpital">
+    </a>
+
+    <nav class="nav-links">
+      <a href="admin.html">Admin</a>
+      <a href="manage-users.html">Utilisateurs</a>
+      <a href="manage-objects.html">Objets</a>
+      <a href="stats.html">Statistiques</a>
+    </nav>
+  </div>
+</header>
+
+<main class="dashboard-page">
+  <div class="container">
+
+    <div class="page-tools">
+      <a href="dashboard.html">Retour site</a>
+      <a href="login.html">Déconnexion</a>
+    </div>
+
+    <section class="dashboard-hero">
+      <div>
+        <span class="tag">Module Administration</span>
+        <h1>Panneau de contrôle global</h1>
+        <p>
+          Supervisez l’ensemble de la plateforme : utilisateurs, objets,
+          services, sécurité et statistiques avancées.
+        </p>
+      </div>
+
+      <div class="level-box">
+        <p class="level-label">Rôle connecté</p>
+        <h3>Administrateur</h3>
+        <p class="level-points">Accès total aux modules Information, Visualisation, Gestion et Administration.</p>
+      </div>
+    </section>
+
+    <p class="access-note">
+      Accès réservé aux administrateurs uniquement.
+    </p>
+
+    <section class="dashboard-cards">
+      <article class="dash-card">
+        <span class="dash-label">Utilisateurs</span>
+        <strong>124</strong>
+        <p>Comptes actifs sur la plateforme.</p>
+      </article>
+
+      <article class="dash-card">
+        <span class="dash-label">Objets</span>
+        <strong>128</strong>
+        <p>Objets connectés enregistrés.</p>
+      </article>
+
+      <article class="dash-card">
+        <span class="dash-label">Catégories</span>
+        <strong>9</strong>
+        <p>Catégories d’objets et services suivis.</p>
+      </article>
+
+      <article class="dash-card">
+        <span class="dash-label">Connexions</span>
+        <strong>1 482</strong>
+        <p>Historique des connexions récentes.</p>
+      </article>
+    </section>
+
+    <section class="quick-grid">
+      <a href="manage-users.html" class="quick-card">
+        <h3>Gérer les utilisateurs</h3>
+        <p>Ajouter, modifier, supprimer des comptes et attribuer les niveaux.</p>
+      </a>
+
+      <a href="manage-objects.html" class="quick-card">
+        <h3>Gérer les objets</h3>
+        <p>Ajouter, modifier, supprimer les objets et leurs catégories.</p>
+      </a>
+
+      <a href="stats.html" class="quick-card">
+        <h3>Rapports avancés</h3>
+        <p>Suivre les statistiques globales, exports et indicateurs de consommation.</p>
+      </a>
+    </section>
+  </div>
+</main>
+
+</body>
+</html>
