@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard - Nouvel Hôpital</title>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="container nav-container">
+    <a href="index.html" class="logo">
+      <img src="images/logo.png" alt="Logo Nouvel Hôpital">
+      <span>Nouvel Hôpital</span>
+    </a>
+
+    <nav class="nav-links">
+      <a href="dashboard.html">Dashboard</a>
+      <a href="objects.html">Objets</a>
+      <a href="rooms.html">Salles</a>
+      <a href="profile.html">Profil</a>
+    </nav>
+  </div>
+</header>
+
+<main class="dashboard-page">
+<div class="container">
+
+<div class="page-tools">
+  <a href="index.html">Retour à l’accueil</a>
+  <a href="login.html">Déconnexion</a>
+</div>
+
+<section class="dashboard-hero">
+  <div>
+    <span class="tag">Utilisateur connecté</span>
+    <h1>Bienvenue, [Prénom]</h1>
+    <p>
+      Accédez à vos informations, vos objets connectés et suivez votre progression sur la plateforme.
+    </p>
+  </div>
+
+  <div class="level-box">
+    <p class="level-label">Niveau actuel</p>
+    <h3>[Niveau]</h3>
+    <p class="level-points">[Points] / [Objectif] points</p>
+    <div class="progress-bar">
+      <div class="progress-fill" style="width: 60%;"></div>
+    </div>
+  </div>
+</section>
+
+<section class="dashboard-cards">
+  <div class="dash-card">
+    <span class="dash-label">Lits disponibles</span>
+    <strong>[Nombre]</strong>
+    <p>Capacité actuelle</p>
+  </div>
+
+  <div class="dash-card">
+    <span class="dash-label">Objets connectés</span>
+    <strong>[Nombre]</strong>
+    <p>Objets enregistrés</p>
+  </div>
+
+  <div class="dash-card">
+    <span class="dash-label">Salles</span>
+    <strong>[Nombre]</strong>
+    <p>Zones suivies</p>
+  </div>
+
+  <div class="dash-card">
+    <span class="dash-label">Points</span>
+    <strong>[Points]</strong>
+    <p>Progression utilisateur</p>
+  </div>
+</section>
+
+<section class="section-small">
+  <div class="profile-card">
+    <h2>Modules accessibles</h2>
+    <ul class="profile-list">
+      <li><strong>Information :</strong> oui</li>
+      <li><strong>Visualisation :</strong> oui</li>
+      <li><strong>Gestion :</strong> non</li>
+      <li><strong>Administration :</strong> non</li>
+    </ul>
+  </div>
+</section>
+
+<section class="section-small">
+  <div class="section-heading small">
+    <span class="tag">Accès rapides</span>
+    <h2>Vos fonctionnalités disponibles</h2>
+  </div>
+
+  <div class="quick-grid">
+    <a href="profile.html" class="quick-card">
+      <h3>Mon profil</h3>
+      <p>Consulter et modifier vos informations personnelles.</p>
+    </a>
+
+    <a href="objects.html" class="quick-card">
+      <h3>Objets connectés</h3>
+      <p>Rechercher et consulter les équipements disponibles.</p>
+    </a>
+
+    <a href="rooms.html" class="quick-card">
+      <h3>Salles</h3>
+      <p>Consulter les chambres, salles et zones de l’hôpital.</p>
+    </a>
+  </div>
+</section>
+
+<section class="section-small">
+  <div class="section-heading small">
+    <span class="tag">Évolution</span>
+    <h2>Progression des niveaux</h2>
+  </div>
+
+  <div class="level-grid">
+    <div class="level-card active-level">
+      <h3>Débutant</h3>
+      <p>Consultation simple de la plateforme et découverte des objets connectés.</p>
+    </div>
+
+    <div class="level-card">
+      <h3>Intermédiaire</h3>
+      <p>Consultation plus autonome avec meilleure maîtrise des outils proposés.</p>
+    </div>
+
+    <div class="level-card">
+      <h3>Avancé</h3>
+      <p>Accès au module Gestion avec davantage de responsabilités techniques.</p>
+    </div>
+
+    <div class="level-card">
+      <h3>Expert</h3>
+      <p>Accès au module Administration et supervision globale de la plateforme.</p>
+    </div>
+  </div>
+</section>
+
+</div>
+</main>
+
+</body>
+</html>
