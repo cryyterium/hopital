@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Salles - Nouvel Hôpital</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<header class="navbar">
+  <div class="container nav-container">
+    <a href="index.html" class="logo">
+      <img src="images/logo.png" alt="Logo Nouvel Hôpital">
+    </a>
+
+    <nav class="nav-links">
+      <a href="dashboard.html">Dashboard</a>
+      <a href="objects.html">Objets</a>
+      <a href="rooms.html">Salles</a>
+      <a href="profile.html">Profil</a>
+    </nav>
+  </div>
+</header>
+
+
+<main class="dashboard-page">
+  <div class="container">
+
+    <div class="page-tools">
+      <a href="dashboard.html">Retour au dashboard</a>
+      <a href="login.html">Déconnexion</a>
+    </div>
+
+    <section class="objects-top">
+      <span class="tag">Gestion des pièces / salles</span>
+      <h1>Organisation des salles</h1>
+      <p>
+        Consultez les chambres, blocs et salles de consultation avec leur statut.
+      </p>
+    </section>
+
+    <section class="filters-box">
+      <div class="filter-item">
+        <label for="search-room">Recherche</label>
+        <input type="text" id="search-room" placeholder="Nom de la salle">
+      </div>
+
+      <div class="filter-item">
+        <label for="room-type">Type</label>
+        <select id="room-type">
+          <option>Tous</option>
+          <option>Chambre</option>
+          <option>Bloc opératoire</option>
+          <option>Consultation</option>
+          <option>Réanimation</option>
+        </select>
+      </div>
+
+      <div class="filter-item">
+        <label for="room-state">Statut</label>
+        <select id="room-state">
+          <option>Tous</option>
+          <option>Libre</option>
+          <option>Occupée</option>
+          <option>Maintenance</option>
+        </select>
+      </div>
+
+      <div class="filter-item">
+        <label for="floor">Étage</label>
+        <select id="floor">
+          <option>Tous</option>
+          <option>RDC</option>
+          <option>1er étage</option>
+          <option>2e étage</option>
+          <option>3e étage</option>
+        </select>
+      </div>
+    </section>
+
+    <section class="room-grid">
+      <article class="room-card">
+        <div class="object-top">
+          <h3>Chambre 101</h3>
+          <span class="status active">Libre</span>
+        </div>
+        <p><strong>Type :</strong> Chambre</p>
+        <p><strong>Étage :</strong> 1er étage</p>
+        <p><strong>Capacité :</strong> 1 lit</p>
+      </article>
+
+      <article class="room-card">
+        <div class="object-top">
+          <h3>Chambre 204</h3>
+          <span class="status warning">Occupée</span>
+        </div>
+        <p><strong>Type :</strong> Chambre</p>
+        <p><strong>Étage :</strong> 2e étage</p>
+        <p><strong>Capacité :</strong> 2 lits</p>
+      </article>
+
+      <article class="room-card">
+        <div class="object-top">
+          <h3>Bloc opératoire A</h3>
+          <span class="status active">Disponible</span>
+        </div>
+        <p><strong>Type :</strong> Bloc opératoire</p>
+        <p><strong>Étage :</strong> RDC</p>
+        <p><strong>Spécialité :</strong> Chirurgie</p>
+      </article>
+
+      <article class="room-card">
+        <div class="object-top">
+          <h3>Salle consultation 12</h3>
+          <span class="status inactive">Maintenance</span>
+        </div>
+        <p><strong>Type :</strong> Consultation</p>
+        <p><strong>Étage :</strong> 1er étage</p>
+        <p><strong>Service :</strong> Cardiologie</p>
+      </article>
+    </section>
+  </div>
+</main>
+
+</body>
+</html>
