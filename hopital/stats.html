@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Statistiques - Nouvel Hôpital</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<header class="navbar">
+  <div class="container nav-container">
+    <a href="index.html" class="logo">
+      <img src="images/logo.png" alt="Logo Nouvel Hôpital">
+    </a>
+
+    <nav class="nav-links">
+      <a href="admin.html">Admin</a>
+      <a href="manage-users.html">Utilisateurs</a>
+      <a href="manage-objects.html">Objets</a>
+      <a href="stats.html">Statistiques</a>
+    </nav>
+  </div>
+</header>
+
+<main class="dashboard-page">
+  <div class="container">
+
+    <div class="page-tools">
+      <a href="admin.html">Retour admin</a>
+      <a href="login.html">Déconnexion</a>
+    </div>
+
+    <section class="objects-top">
+      <span class="tag">Rapports avancés</span>
+      <h1>Statistiques globales</h1>
+      <p>
+        Visualisez les indicateurs liés à la plateforme, aux services et aux ressources.
+      </p>
+    </section>
+
+    <p class="access-note">
+      Accès réservé aux administrateurs.
+    </p>
+
+    <section class="dashboard-cards">
+      <article class="dash-card">
+        <span class="dash-label">Énergie totale</span>
+        <strong>12 480 kWh</strong>
+        <p>Consommation estimée sur la période sélectionnée.</p>
+      </article>
+
+      <article class="dash-card">
+        <span class="dash-label">Eau totale</span>
+        <strong>8 320 L</strong>
+        <p>Suivi global de la consommation en eau.</p>
+      </article>
+
+      <article class="dash-card">
+        <span class="dash-label">Taux de connexion</span>
+        <strong>86%</strong>
+        <p>Utilisateurs ayant accédé à la plateforme cette semaine.</p>
+      </article>
+
+      <article class="dash-card">
+        <span class="dash-label">Service le plus consulté</span>
+        <strong>Urgences</strong>
+        <p>Service ayant généré le plus d’accès récents.</p>
+      </article>
+    </section>
+
+    <section class="quick-grid">
+      <div class="quick-card">
+        <h3>Objets inefficaces</h3>
+        <p>4 objets nécessitent une maintenance ou une vérification technique.</p>
+      </div>
+
+      <div class="quick-card">
+        <h3>Historique des données</h3>
+        <p>Les historiques permettent de suivre l’évolution des équipements connectés.</p>
+      </div>
+
+      <div class="quick-card">
+        <h3>Exports</h3>
+        <p>Préparation des rapports détaillés au format CSV ou PDF.</p>
+      </div>
+    </section>
+  </div>
+</main>
+
+</body>
+</html>
