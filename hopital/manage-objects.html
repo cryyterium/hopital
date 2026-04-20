@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gestion des objets - Nouvel Hôpital</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<header class="navbar">
+  <div class="container nav-container">
+    <a href="index.html" class="logo">
+      <img src="images/logo.png" alt="Logo Nouvel Hôpital">
+    </a>
+
+    <nav class="nav-links">
+      <a href="dashboard.html">Dashboard</a>
+      <a href="objects.html">Objets</a>
+      <a href="rooms.html">Salles</a>
+      <a href="manage-objects.html">Gestion objets</a>
+    </nav>
+  </div>
+</header>
+
+<main class="dashboard-page">
+  <div class="container">
+
+    <div class="page-tools">
+      <a href="dashboard.html">Retour au dashboard</a>
+      <a href="login.html">Déconnexion</a>
+    </div>
+
+    <section class="objects-top">
+      <span class="tag">Module Gestion</span>
+      <h1>Gérer les objets connectés</h1>
+      <p>
+        Ajoutez, modifiez ou mettez à jour les objets connectés de la plateforme.
+      </p>
+    </section>
+
+    <p class="access-note">
+      Accès réservé aux utilisateurs avancés ou administrateurs.
+    </p>
+
+    <section class="manage-grid">
+      <div class="profile-card">
+        <h2>Ajouter un objet</h2>
+        <form class="auth-form">
+          <label for="obj-name">Nom</label>
+          <input id="obj-name" type="text" placeholder="Nom de l'objet">
+
+          <label for="obj-type">Type</label>
+          <select id="obj-type">
+            <option>Lit connecté</option>
+            <option>Moniteur cardiaque</option>
+            <option>Capteur température</option>
+            <option>Caméra</option>
+          </select>
+
+          <label for="obj-room">Salle</label>
+          <select id="obj-room">
+            <option>Chambre 101</option>
+            <option>Chambre 204</option>
+            <option>Bloc A</option>
+          </select>
+
+          <label for="obj-state">État</label>
+          <select id="obj-state">
+            <option>Actif</option>
+            <option>Inactif</option>
+            <option>Maintenance</option>
+          </select>
+
+          <button class="btn btn-primary" type="submit">Ajouter</button>
+        </form>
+      </div>
+
+      <div class="profile-card">
+        <h2>Objets récents</h2>
+        <div class="mini-list">
+          <div class="mini-row">
+            <span>Lit connecté 101</span>
+            <span class="status active">Actif</span>
+          </div>
+          <div class="mini-row">
+            <span>Moniteur 204</span>
+            <span class="status active">Actif</span>
+          </div>
+          <div class="mini-row">
+            <span>Caméra urgences</span>
+            <span class="status inactive">Inactif</span>
+          </div>
+          <div class="mini-row">
+            <span>Capteur bloc A</span>
+            <span class="status warning">Surveillance</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-small">
+      <div class="section-heading small">
+        <span class="tag">Actions</span>
+        <h2>Actions de gestion disponibles</h2>
+      </div>
+
+      <div class="quick-grid">
+        <div class="quick-card">
+          <h3>Modifier un objet</h3>
+          <p>Changer le nom, l’état, la description ou les paramètres d’utilisation.</p>
+        </div>
+
+        <div class="quick-card">
+          <h3>Associer à une salle</h3>
+          <p>Lier un objet connecté à une chambre, un bloc ou une zone spécifique.</p>
+        </div>
+
+        <div class="quick-card">
+          <h3>Demander une suppression</h3>
+          <p>Solliciter l’administrateur pour retirer un objet de la plateforme.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+</body>
+</html>
