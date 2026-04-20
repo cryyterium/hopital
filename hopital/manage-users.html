@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gestion utilisateurs - Nouvel Hôpital</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<header class="navbar">
+  <div class="container nav-container">
+    <a href="index.html" class="logo">
+      <img src="images/logo.png" alt="Logo Nouvel Hôpital">
+    </a>
+
+    <nav class="nav-links">
+      <a href="admin.html">Admin</a>
+      <a href="manage-users.html">Utilisateurs</a>
+      <a href="manage-objects.html">Objets</a>
+      <a href="stats.html">Statistiques</a>
+    </nav>
+  </div>
+</header>
+
+<main class="dashboard-page">
+  <div class="container">
+
+    <div class="page-tools">
+      <a href="admin.html">Retour admin</a>
+      <a href="login.html">Déconnexion</a>
+    </div>
+
+    <section class="objects-top">
+      <span class="tag">Gestion des utilisateurs</span>
+      <h1>Utilisateurs de la plateforme</h1>
+      <p>
+        Ajoutez, modifiez ou supprimez des utilisateurs et ajustez leurs niveaux d’accès.
+      </p>
+    </section>
+
+    <p class="access-note">
+      Accès réservé aux administrateurs.
+    </p>
+
+    <section class="manage-grid">
+      <div class="profile-card">
+        <h2>Ajouter un utilisateur</h2>
+        <form class="auth-form">
+          <label for="user-name">Nom</label>
+          <input id="user-name" type="text" placeholder="Nom">
+
+          <label for="user-firstname">Prénom</label>
+          <input id="user-firstname" type="text" placeholder="Prénom">
+
+          <label for="user-role">Rôle</label>
+          <select id="user-role">
+            <option>Utilisateur simple</option>
+            <option>Utilisateur complexe</option>
+            <option>Administrateur</option>
+          </select>
+
+          <label for="user-level">Niveau</label>
+          <select id="user-level">
+            <option>Débutant</option>
+            <option>Intermédiaire</option>
+            <option>Avancé</option>
+            <option>Expert</option>
+          </select>
+
+          <button class="btn btn-primary" type="submit">Ajouter</button>
+        </form>
+      </div>
+
+      <div class="profile-card">
+        <h2>Liste rapide</h2>
+        <div class="mini-list">
+          <div class="mini-row">
+            <span>Paul Martin</span>
+            <span>Débutant</span>
+          </div>
+          <div class="mini-row">
+            <span>Leïla Ahmed</span>
+            <span>Intermédiaire</span>
+          </div>
+          <div class="mini-row">
+            <span>Yasmine N.</span>
+            <span>Avancé</span>
+          </div>
+          <div class="mini-row">
+            <span>Admin Principal</span>
+            <span>Expert</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="table-card">
+      <h2>Historique utilisateurs</h2>
+      <div class="simple-table">
+        <div class="table-row table-head">
+          <span>Nom</span>
+          <span>Rôle</span>
+          <span>Niveau</span>
+          <span>Points</span>
+        </div>
+        <div class="table-row">
+          <span>Paul Martin</span>
+          <span>Simple</span>
+          <span>Débutant</span>
+          <span>2.5</span>
+        </div>
+        <div class="table-row">
+          <span>Leïla Ahmed</span>
+          <span>Simple</span>
+          <span>Intermédiaire</span>
+          <span>4</span>
+        </div>
+        <div class="table-row">
+          <span>Yasmine N.</span>
+          <span>Complexe</span>
+          <span>Avancé</span>
+          <span>5.5</span>
+        </div>
+        <div class="table-row">
+          <span>Admin Principal</span>
+          <span>Admin</span>
+          <span>Expert</span>
+          <span>8</span>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+</body>
+</html>
