@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Objets connectés - Nouvel Hôpital</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<header class="navbar">
+  <div class="container nav-container">
+    <a href="index.html" class="logo">
+      <img src="images/logo.png" alt="Logo Nouvel Hôpital">
+    </a>
+
+    <nav class="nav-links">
+      <a href="dashboard.html">Dashboard</a>
+      <a href="objects.html">Objets</a>
+      <a href="rooms.html">Salles</a>
+      <a href="profile.html">Profil</a>
+    </nav>
+  </div>
+</header>
+
+<main class="dashboard-page">
+  <div class="container">
+
+    <div class="page-tools">
+      <a href="dashboard.html">Retour au dashboard</a>
+      <a href="login.html">Déconnexion</a>
+    </div>
+
+    <section class="objects-top">
+      <div>
+        <span class="tag">Recherche et consultation</span>
+        <h1>Objets connectés</h1>
+        <p>
+          Consultez les objets enregistrés sur la plateforme et utilisez
+          les filtres pour affiner la recherche.
+        </p>
+      </div>
+    </section>
+
+    <section class="filters-box">
+      <div class="filter-item">
+        <label for="search">Recherche</label>
+        <input type="text" id="search" placeholder="Nom ou description de l’objet">
+      </div>
+
+      <div class="filter-item">
+        <label for="type">Type</label>
+        <select id="type">
+          <option>Tous</option>
+          <option>Lit connecté</option>
+          <option>Moniteur cardiaque</option>
+          <option>Capteur température</option>
+          <option>Caméra</option>
+        </select>
+      </div>
+
+      <div class="filter-item">
+        <label for="state">État</label>
+        <select id="state">
+          <option>Tous</option>
+          <option>Actif</option>
+          <option>Inactif</option>
+          <option>Maintenance</option>
+        </select>
+      </div>
+
+      <div class="filter-item">
+        <label for="room">Salle</label>
+        <select id="room">
+          <option>Toutes</option>
+          <option>Chambre 101</option>
+          <option>Chambre 204</option>
+          <option>Bloc A</option>
+          <option>Couloir urgences</option>
+        </select>
+      </div>
+    </section>
+
+    <p class="fake-note">
+      Les filtres sont illustratifs dans cette version. Ils seront connectés à la base de données pour permettre une recherche dynamique.
+    </p>
+
+    <section class="object-grid">
+      <article class="object-card-modern">
+        <div class="object-top">
+          <h3>Lit connecté 101</h3>
+          <span class="status active">Actif</span>
+        </div>
+        <p>Type : Lit connecté</p>
+        <p>Salle : Chambre 101</p>
+        <p>Batterie : 78%</p>
+        <p>Dernière interaction : Aujourd’hui, 09:40</p>
+      </article>
+
+      <article class="object-card-modern">
+        <div class="object-top">
+          <h3>Moniteur cardiaque 204</h3>
+          <span class="status active">Actif</span>
+        </div>
+        <p>Type : Moniteur cardiaque</p>
+        <p>Salle : Chambre 204</p>
+        <p>Batterie : 55%</p>
+        <p>Dernière interaction : Aujourd’hui, 10:10</p>
+      </article>
+
+      <article class="object-card-modern">
+        <div class="object-top">
+          <h3>Capteur température bloc A</h3>
+          <span class="status warning">Surveillance</span>
+        </div>
+        <p>Type : Capteur température</p>
+        <p>Salle : Bloc opératoire A</p>
+        <p>Connectivité : Wi-Fi</p>
+        <p>Température actuelle : 21°C</p>
+      </article>
+
+      <article class="object-card-modern">
+        <div class="object-top">
+          <h3>Caméra urgences</h3>
+          <span class="status inactive">Inactif</span>
+        </div>
+        <p>Type : Caméra</p>
+        <p>Salle : Couloir urgences</p>
+        <p>État : Déconnectée</p>
+        <p>Dernière maintenance : 15/04/2026</p>
+      </article>
+    </section>
+  </div>
+</main>
+
+</body>
+</html>
