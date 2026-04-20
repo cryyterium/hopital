@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inscription - Nouvel Hôpital</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <header class="navbar">
+  <div class="container nav-container">
+    <a href="index.html" class="logo">
+      <img src="images/logo.png" alt="Logo Nouvel Hôpital">
+    </a>
+
+    <nav class="nav-links">
+      <a href="index.html#about">À propos</a>
+      <a href="index.html#services">Services</a>
+      <a href="index.html#news">Actualités</a>
+      <a href="index.html#resources">Ressources</a>
+    </nav>
+
+    <div class="nav-actions">
+      <a href="login.html" class="btn btn-light">Connexion</a>
+      <a href="register.html" class="btn btn-primary">Inscription</a>
+    </div>
+  </div>
+</header>
+
+  <main class="auth-page">
+    <div class="container auth-grid">
+      <section class="auth-side">
+        <span class="tag">Création de compte</span>
+        <h1>Inscription</h1>
+        <p>
+          Créez votre compte pour accéder à la plateforme du Nouvel Hôpital.
+          L’utilisateur commence au niveau débutant puis évolue selon les points accumulés.
+        </p>
+      </section>
+
+      <section class="auth-card">
+        <h2>Créer un compte</h2>
+        <form class="auth-form">
+          <label for="nom">Nom</label>
+          <input id="nom" type="text" placeholder="Votre nom" />
+
+          <label for="prenom">Prénom</label>
+          <input id="prenom" type="text" placeholder="Votre prénom" />
+
+          <label for="email">Email</label>
+          <input id="email" type="email" placeholder="Votre email" />
+
+          <label for="login-register">Login</label>
+          <input id="login-register" type="text" placeholder="Choisissez un login" />
+
+          <label for="password-register">Mot de passe</label>
+          <input id="password-register" type="password" placeholder="Choisissez un mot de passe" />
+
+          <button class="btn btn-primary" type="submit">S’inscrire</button>
+        </form>
+
+        <p class="auth-bottom">
+          Vous avez déjà un compte ?
+          <a href="login.html">Connectez-vous</a>
+        </p>
+      </section>
+    </div>
+  </main>
+
+</body>
+</html>
