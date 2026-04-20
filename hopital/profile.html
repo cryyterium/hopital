@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profil - Nouvel Hôpital</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<header class="navbar">
+  <div class="container nav-container">
+    <a href="index.html" class="logo">
+      <img src="images/logo.png" alt="Logo Nouvel Hôpital">
+    </a>
+
+    <nav class="nav-links">
+      <a href="dashboard.html">Dashboard</a>
+      <a href="objects.html">Objets</a>
+      <a href="rooms.html">Salles</a>
+      <a href="profile.html">Profil</a>
+    </nav>
+  </div>
+</header>
+
+<main class="dashboard-page">
+  <div class="container">
+
+    <div class="page-tools">
+      <a href="dashboard.html">Retour au dashboard</a>
+      <a href="login.html">Déconnexion</a>
+    </div>
+
+    <section class="profile-header">
+      <div class="profile-avatar">NP</div>
+      <div>
+        <span class="tag">Mon profil</span>
+        <h1>[Nom Prénom]</h1>
+        <p>Utilisateur — Niveau [Niveau]</p>
+      </div>
+    </section>
+
+    <section class="profile-grid">
+      <div class="profile-card">
+        <h2>Informations publiques</h2>
+        <ul class="profile-list">
+          <li><strong>Login :</strong> [login]</li>
+          <li><strong>Âge :</strong> [âge]</li>
+          <li><strong>Genre :</strong> [genre]</li>
+          <li><strong>Date de naissance :</strong> [date]</li>
+          <li><strong>Type de membre :</strong> [type]</li>
+        </ul>
+      </div>
+
+      <div class="profile-card">
+        <h2>Informations privées</h2>
+        <ul class="profile-list">
+          <li><strong>Nom :</strong> [Nom]</li>
+          <li><strong>Prénom :</strong> [Prénom]</li>
+          <li><strong>Email :</strong> [email]</li>
+          <li><strong>Mot de passe :</strong> ********</li>
+        </ul>
+      </div>
+
+      <div class="profile-card">
+        <h2>Niveau et points</h2>
+        <ul class="profile-list">
+          <li><strong>Niveau actuel :</strong> [Niveau]</li>
+          <li><strong>Points :</strong> [Points]</li>
+          <li><strong>Prochain niveau :</strong> [Niveau suivant]</li>
+          <li><strong>Points requis :</strong> [Objectif]</li>
+        </ul>
+
+        <div class="progress-bar">
+          <div class="progress-fill" style="width: 60%;"></div>
+        </div>
+      </div>
+
+      <div class="profile-card">
+        <h2>Actions</h2>
+        <div class="profile-actions">
+          <a href="#" class="btn btn-primary">Modifier le profil</a>
+          <a href="dashboard.html" class="btn btn-secondary">Retour au dashboard</a>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+</body>
+</html>
