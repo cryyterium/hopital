@@ -82,54 +82,30 @@
       </div>
     </section>
 
-    <p class="fake-note">
-      Les filtres sont illustratifs dans cette version. Ils seront connectés à la base de données pour permettre une recherche dynamique.
-    </p>
+    
 
     <section class="object-grid">
-      <article class="object-card-modern">
-        <div class="object-top">
-          <h3>Lit connecté 101</h3>
-          <span class="status active">Actif</span>
-        </div>
-        <p>Type : Lit connecté</p>
-        <p>Salle : Chambre 101</p>
-        <p>Batterie : 78%</p>
-        <p>Dernière interaction : Aujourd’hui, 09:40</p>
-      </article>
+      {% for objet in objets %}
+    <article class="object-card-modern">
+     <div class="object-top">
+        <h3>{{ objet.nom }}</h3>
 
-      <article class="object-card-modern">
-        <div class="object-top">
-          <h3>Moniteur cardiaque 204</h3>
-          <span class="status active">Actif</span>
-        </div>
-        <p>Type : Moniteur cardiaque</p>
-        <p>Salle : Chambre 204</p>
-        <p>Batterie : 55%</p>
-        <p>Dernière interaction : Aujourd’hui, 10:10</p>
-      </article>
+        {% if objet.etat == "actif" %}
+        <span class="status active">Actif</span>
+        {% else %}
+        <span class="status inactive">Inactif</span>
+        {% endif %}
+      </div>
 
-      <article class="object-card-modern">
-        <div class="object-top">
-          <h3>Capteur température bloc A</h3>
-          <span class="status warning">Surveillance</span>
-        </div>
-        <p>Type : Capteur température</p>
-        <p>Salle : Bloc opératoire A</p>
-        <p>Connectivité : Wi-Fi</p>
-        <p>Température actuelle : 21°C</p>
-      </article>
-
-      <article class="object-card-modern">
-        <div class="object-top">
-          <h3>Caméra urgences</h3>
-          <span class="status inactive">Inactif</span>
-        </div>
-        <p>Type : Caméra</p>
-        <p>Salle : Couloir urgences</p>
-        <p>État : Déconnectée</p>
-        <p>Dernière maintenance : 15/04/2026</p>
-      </article>
+      <p>Type : {{ objet.type }}</p>
+      <p>Salle : {{ objet.salle.nom }}</p>
+      <p>Batterie : {{ objet.niveau_batterie }}%</p>
+      <p>Dernière interaction : {{ objet.derniere_interaction }}</p>
+    </article>
+    {% empty %}
+    <p>Aucun objet connecté trouvé.</p>
+    {% endfor %}
+      
     </section>
   </div>
 </main>

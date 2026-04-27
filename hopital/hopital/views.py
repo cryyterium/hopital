@@ -3,13 +3,6 @@ from django.shortcuts import render
 # Create your views here.
 from .models import ObjetConnecte
 
-def accueil(request):
-    return render(request, 'hopital/accueil.html')
-
-def liste_objets(request):
-    objets = ObjetConnecte.objects.all()
-    return render(request, 'hopital/liste_objets.html', {'objets': objets})
-
 def index(request):
     return render(request, 'hopital/index.html')
 
@@ -26,7 +19,8 @@ def profile(request):
     return render(request, 'hopital/profile.html')
 
 def objects(request):
-    return render(request, 'hopital/objects.html')
+    objets = ObjetConnecte.objects.all()
+    return render(request, 'hopital/objects.html', {'objets': objets})
 
 def room(request):
     return render(request, 'hopital/room.html')

@@ -1,0 +1,6 @@
+﻿"id","nom","description","etage"
+"1","Urgences","Prise en charge des urgences medicales","1"
+"2","Cardiologie","Maladies cardiovasculaires","2"
+"3","Chirurgie","Interventions chirurgicales","3"
+"4","Radiologie","Imagerie medicale","4"
+"5","Hospitalisation","Sejours et soins des patients","2"
