@@ -1,24 +1,25 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Administration - Nouvel Hôpital</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="{% static 'hopital/CSS/style.css' %}">
 </head>
 <body>
 
 <header class="navbar">
   <div class="container nav-container">
-    <a href="index.html" class="logo">
+    <a href="{% url 'index' %}" class="logo">
       <img src="images/logo.png" alt="Logo Nouvel Hôpital">
     </a>
 
     <nav class="nav-links">
-      <a href="admin.html">Admin</a>
-      <a href="manage-users.html">Utilisateurs</a>
-      <a href="manage-objects.html">Objets</a>
-      <a href="stats.html">Statistiques</a>
+      <a href="{% url 'admin' %}">Admin</a>
+      <a href="{% url 'manage_users' %}">Utilisateurs</a>
+      <a href="{% url 'manage_objects' %}">Objets</a>
+      <a href="{% url 'stats' %}">Statistiques</a>
     </nav>
   </div>
 </header>
@@ -27,8 +28,8 @@
   <div class="container">
 
     <div class="page-tools">
-      <a href="dashboard.html">Retour site</a>
-      <a href="login.html">Déconnexion</a>
+      <a href="{% url 'dashboard' %}">Retour site</a>
+      <a href="{% url 'login' %}">Déconnexion</a>
     </div>
 
     <section class="dashboard-hero">
@@ -79,17 +80,17 @@
     </section>
 
     <section class="quick-grid">
-      <a href="manage-users.html" class="quick-card">
+      <a href="{% url 'manage_users' %}" class="quick-card">
         <h3>Gérer les utilisateurs</h3>
         <p>Ajouter, modifier, supprimer des comptes et attribuer les niveaux.</p>
       </a>
 
-      <a href="manage-objects.html" class="quick-card">
+      <a href="{% url 'manage_objects' %}" class="quick-card">
         <h3>Gérer les objets</h3>
         <p>Ajouter, modifier, supprimer les objets et leurs catégories.</p>
       </a>
 
-      <a href="stats.html" class="quick-card">
+      <a href="{% url 'stats' %}" class="quick-card">
         <h3>Rapports avancés</h3>
         <p>Suivre les statistiques globales, exports et indicateurs de consommation.</p>
       </a>

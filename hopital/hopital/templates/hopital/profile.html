@@ -1,24 +1,25 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Profil - Nouvel Hôpital</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="{% static 'hopital/CSS/style.css' %}">
 </head>
 <body>
 
 <header class="navbar">
   <div class="container nav-container">
-    <a href="index.html" class="logo">
+    <a href="{% url 'index' %}" class="logo">
       <img src="images/logo.png" alt="Logo Nouvel Hôpital">
     </a>
 
     <nav class="nav-links">
-      <a href="dashboard.html">Dashboard</a>
-      <a href="objects.html">Objets</a>
-      <a href="rooms.html">Salles</a>
-      <a href="profile.html">Profil</a>
+      <a href="{% url 'dashboard' %}">Dashboard</a>
+      <a href="{% url 'objects' %}">Objets</a>
+      <a href="{% url 'room' %}">Salles</a>
+      <a href="{% url 'profile' %}">Profil</a>
     </nav>
   </div>
 </header>
@@ -27,8 +28,8 @@
   <div class="container">
 
     <div class="page-tools">
-      <a href="dashboard.html">Retour au dashboard</a>
-      <a href="login.html">Déconnexion</a>
+      <a href="{% url 'dashboard' %}">Retour au dashboard</a>
+      <a href="{% url 'login' %}">Déconnexion</a>
     </div>
 
     <section class="profile-header">
@@ -80,7 +81,7 @@
         <h2>Actions</h2>
         <div class="profile-actions">
           <a href="#" class="btn btn-primary">Modifier le profil</a>
-          <a href="dashboard.html" class="btn btn-secondary">Retour au dashboard</a>
+          <a href="{% url 'dashboard' %}" class="btn btn-secondary">Retour au dashboard</a>
         </div>
       </div>
     </section>

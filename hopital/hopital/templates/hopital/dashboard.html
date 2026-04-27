@@ -1,25 +1,26 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Dashboard - Nouvel Hôpital</title>
-  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="stylesheet" href="{% static 'hopital/CSS/style.css' %}">
 </head>
 <body>
 
 <header class="navbar">
   <div class="container nav-container">
-    <a href="index.html" class="logo">
+    <a href="{% url 'index' %}" class="logo">
       <img src="images/logo.png" alt="Logo Nouvel Hôpital">
       <span>Nouvel Hôpital</span>
     </a>
 
     <nav class="nav-links">
-      <a href="dashboard.html">Dashboard</a>
-      <a href="objects.html">Objets</a>
-      <a href="rooms.html">Salles</a>
-      <a href="profile.html">Profil</a>
+      <a href="{% url 'dashboard' %}">Dashboard</a>
+      <a href="{% url 'objects' %}">Objets</a>
+      <a href="{% url 'room' %}">Salles</a>
+      <a href="{% url 'profile' %}">Profil</a>
     </nav>
   </div>
 </header>
@@ -28,8 +29,8 @@
 <div class="container">
 
 <div class="page-tools">
-  <a href="index.html">Retour à l’accueil</a>
-  <a href="login.html">Déconnexion</a>
+  <a href="{% url 'index' %}">Retour à l’accueil</a>
+  <a href="{% url 'login' %}">Déconnexion</a>
 </div>
 
 <section class="dashboard-hero">
@@ -96,17 +97,17 @@
   </div>
 
   <div class="quick-grid">
-    <a href="profile.html" class="quick-card">
+    <a href="{% url 'profile' %}" class="quick-card">
       <h3>Mon profil</h3>
       <p>Consulter et modifier vos informations personnelles.</p>
     </a>
 
-    <a href="objects.html" class="quick-card">
+    <a href="{% url 'objects' %}" class="quick-card">
       <h3>Objets connectés</h3>
       <p>Rechercher et consulter les équipements disponibles.</p>
     </a>
 
-    <a href="rooms.html" class="quick-card">
+    <a href="{% url 'room' %}" class="quick-card">
       <h3>Salles</h3>
       <p>Consulter les chambres, salles et zones de l’hôpital.</p>
     </a>

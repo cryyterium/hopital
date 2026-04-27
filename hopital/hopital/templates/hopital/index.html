@@ -1,16 +1,17 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Nouvel Hôpital</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="{% static 'hopital/CSS/style.css' %}">
 </head>
 <body>
 
   <header class="navbar">
     <div class="container nav-container">
-      <a href="index.html" class="logo">
+      <a href="{% url 'index' %}" class="logo">
         <img src="images/logo.png" alt="Logo Nouvel Hôpital">
       </a>
 
@@ -22,8 +23,8 @@
       </nav>
 
       <div class="nav-actions">
-        <a href="login.html" class="btn btn-light">Connexion</a>
-        <a href="register.html" class="btn btn-primary">Inscription</a>
+        <a href="{% url 'login' %}"" class="btn btn-light">Connexion</a>
+        <a href="{% url 'register' %}" class="btn btn-primary">Inscription</a>
       </div>
     </div>
   </header>
@@ -41,8 +42,8 @@
           </p>
 
           <div class="hero-buttons">
-            <a href="register.html" class="btn btn-primary">Créer un compte</a>
-            <a href="login.html" class="btn btn-secondary">Connexion</a>
+            <a href="{% url 'register' %}" class="btn btn-primary">Créer un compte</a>
+            <a href="{% url 'login' %}"" class="btn btn-secondary">Connexion</a>
           </div>
         </div>
       </div>
@@ -267,7 +268,7 @@
             </p>
           </div>
 
-          <a href="register.html" class="btn btn-primary">S’inscrire</a>
+          <a href="{% url 'register' %}" class="btn btn-primary">S’inscrire</a>
         </div>
       </div>
     </section>
@@ -282,12 +283,12 @@
 
       <div class="footer-links">
         <a href="#">Accueil</a>
-        <a href="login.html">Connexion</a>
-        <a href="register.html">Inscription</a>
+        <a href="{% url 'login' %}">Connexion</a>
+        <a href="{% url 'register' %}">Inscription</a>
       </div>
     </div>
   </footer>
 
-  <script src="js/menu.js"></script>
+  <script src="{% static 'hopital/JS/menu.js' %}"></script>
 </body>
 </html>

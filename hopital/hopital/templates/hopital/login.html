@@ -1,29 +1,30 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Connexion - Nouvel Hôpital</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="{% static 'hopital/CSS/style.css' %}">
 </head>
 <body>
 
   <header class="navbar">
   <div class="container nav-container">
-    <a href="index.html" class="logo">
+    <a href="{% url 'index' %}" class="logo">
       <img src="images/logo.png" alt="Logo Nouvel Hôpital">
     </a>
 
     <nav class="nav-links">
-      <a href="index.html#about">À propos</a>
-      <a href="index.html#services">Services</a>
-      <a href="index.html#news">Actualités</a>
-      <a href="index.html#resources">Ressources</a>
+      <a href="{% url 'index' %}#about">À propos</a>
+      <a href="{% url 'index' %}l#services">Services</a>
+      <a href="{% url 'index' %}#news">Actualités</a>
+      <a href="{% url 'index' %}#resources">Ressources</a>
     </nav>
 
     <div class="nav-actions">
-      <a href="login.html" class="btn btn-light">Connexion</a>
-      <a href="register.html" class="btn btn-primary">Inscription</a>
+      <a href="{% url 'login' %}" class="btn btn-light">Connexion</a>
+      <a href="{% url 'register' %}" class="btn btn-primary">Inscription</a>
     </div>
   </div>
 </header>
@@ -53,7 +54,7 @@
 
         <p class="auth-bottom">
           Vous n’avez pas encore de compte ?
-          <a href="register.html">Inscrivez-vous</a>
+          <a href="{% url 'register' %}">Inscrivez-vous</a>
         </p>
       </section>
     </div>
