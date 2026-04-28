@@ -12,7 +12,7 @@
 <header class="navbar">
   <div class="container nav-container">
     <a href="{% url 'index' %}" class="logo">
-      <img src="images/logo.png" alt="Logo Nouvel Hôpital">
+      <img src="{% static 'hopital/photo/logo.png' %}" alt="Logo Nouvel Hôpital">
     </a>
 
     <nav class="nav-links">
@@ -33,11 +33,11 @@
     </div>
 
     <section class="profile-header">
-      <div class="profile-avatar">NP</div>
+      <div class="profile-avatar">{{ request.user.first_name|first }}{{ request.user.last_name|first }}</div>
       <div>
         <span class="tag">Mon profil</span>
-        <h1>[Nom Prénom]</h1>
-        <p>Utilisateur — Niveau [Niveau]</p>
+        <h1>{{ request.user.last_name }} {{ request.user.first_name }}</h1>
+        <p>Utilisateur — Niveau {{ profil.niveau }}</p>
       </div>
     </section>
 
@@ -45,20 +45,20 @@
       <div class="profile-card">
         <h2>Informations publiques</h2>
         <ul class="profile-list">
-          <li><strong>Login :</strong> [login]</li>
-          <li><strong>Âge :</strong> [âge]</li>
-          <li><strong>Genre :</strong> [genre]</li>
-          <li><strong>Date de naissance :</strong> [date]</li>
-          <li><strong>Type de membre :</strong> [type]</li>
+          <li><strong>Login :</strong>{{ request.user.username }}</li>
+          <li><strong>Âge :</strong> {{ profil.age }}</li>
+          <li><strong>Genre :</strong> {{ profil.genre }}</li>
+          <li><strong>Date de naissance :</strong> {{ profil.date_naissance }}</li>
+          <li><strong>Type de membre :</strong>{{ profil.type_membre }}</li>
         </ul>
       </div>
 
       <div class="profile-card">
         <h2>Informations privées</h2>
         <ul class="profile-list">
-          <li><strong>Nom :</strong> [Nom]</li>
-          <li><strong>Prénom :</strong> [Prénom]</li>
-          <li><strong>Email :</strong> [email]</li>
+          <li><strong>Nom :</strong> {{ request.user.last_name }}</li>
+          <li><strong>Prénom :</strong> {{ request.user.first_name }}</li>
+          <li><strong>Email :</strong> {{ request.user.email }}</li>
           <li><strong>Mot de passe :</strong> ********</li>
         </ul>
       </div>
@@ -66,10 +66,10 @@
       <div class="profile-card">
         <h2>Niveau et points</h2>
         <ul class="profile-list">
-          <li><strong>Niveau actuel :</strong> [Niveau]</li>
-          <li><strong>Points :</strong> [Points]</li>
-          <li><strong>Prochain niveau :</strong> [Niveau suivant]</li>
-          <li><strong>Points requis :</strong> [Objectif]</li>
+          <li><strong>Niveau actuel :</strong> {{ profil.niveau }}</li>
+          <li><strong>Points :</strong> {{ points }}</li>
+          <li><strong>Prochain niveau :</strong> {{ profil.nb_connexions }}</li>
+          <li><strong>Points requis :</strong> {{ profil.nb_actions }}</li>
         </ul>
 
         <div class="progress-bar">
@@ -78,15 +78,58 @@
       </div>
 
       <div class="profile-card">
-        <h2>Actions</h2>
-        <div class="profile-actions">
-          <a href="#" class="btn btn-primary">Modifier le profil</a>
-          <a href="{% url 'dashboard' %}" class="btn btn-secondary">Retour au dashboard</a>
+        <h2>Modifier mon profil</h2>
+        <button type="button" onclick="toggleForm()" class="btn btn-primary">
+          Modifier le profil
+        </button>
+        <div id="editForm" style="display: none;" class="profile-card">
+          
+          <form method="POST" class="profile-actions">
+          {% csrf_token %}
+
+          <input type="text" name="nom" value="{{ request.user.last_name }}" placeholder="Nom">
+          <input type="text" name="prenom" value="{{ request.user.first_name }}" placeholder="Prénom">
+          <input type="email" name="email" value="{{ request.user.email }}" placeholder="Email">
+
+          <input type="number" name="age" value="{{ profil.age }}" placeholder="Âge">
+          <select name="genre">
+            <option value="">Sélectionner</option>
+
+            <option value="Homme" {% if profil.genre == "Homme" %}selected{% endif %}>
+              Homme
+            </option>
+
+            <option value="Femme" {% if profil.genre == "Femme" %}selected{% endif %}>
+              Femme
+            </option>
+
+            <option value="Autre" {% if profil.genre == "Autre" %}selected{% endif %}>
+              Autre
+            </option>
+
+            <option value="Non précisé" {% if profil.genre == "Non précisé" %}selected{% endif %}>
+             Non précisé
+            </option>
+          </select>
+          <button type="submit" class="btn btn-primary">Enregistrer</button>
+          <button type="button" onclick="toggleForm()" class="btn btn-secondary">Annuler</button>
+          </form>
+
         </div>
       </div>
     </section>
   </div>
 </main>
+<script>
+function toggleForm() {
+  const form = document.getElementById("editForm");
 
+  if (form.style.display === "none" || form.style.display === "") {
+    form.style.display = "block";
+  } else {
+    form.style.display = "none";
+  }
+}
+</script>
 </body>
 </html>

@@ -12,7 +12,7 @@
   <header class="navbar">
   <div class="container nav-container">
     <a href="{% url 'index' %}" class="logo">
-      <img src="images/logo.png" alt="Logo Nouvel Hôpital">
+      <img src="{% static 'hopital/photo/logo.png' %}" alt="Logo Nouvel Hôpital">
     </a>
 
     <nav class="nav-links">
@@ -42,15 +42,23 @@
 
       <section class="auth-card">
         <h2>Se connecter</h2>
-        <form class="auth-form">
+        
+        <form method="POST" class="auth-form">
+          {% csrf_token %}
+
           <label for="login">Login</label>
-          <input id="login" type="text" placeholder="Votre login" />
+          <input id="login" name="username" type="text" placeholder="Votre login" required />
 
           <label for="password">Mot de passe</label>
-          <input id="password" type="password" placeholder="Votre mot de passe" />
+          <input id="password" name="password" type="password" placeholder="Votre mot de passe" required />
 
           <button class="btn btn-primary" type="submit">Connexion</button>
         </form>
+
+        {% if error %}
+          <p style="color:red;">{{ error }}</p>
+        {% endif %}
+
 
         <p class="auth-bottom">
           Vous n’avez pas encore de compte ?

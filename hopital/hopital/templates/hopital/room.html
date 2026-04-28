@@ -12,7 +12,7 @@
 <header class="navbar">
   <div class="container nav-container">
     <a href="{% url 'index' %}" class="logo">
-      <img src="images/logo.png" alt="Logo Nouvel Hôpital">
+      <img src="{% static 'hopital/photo/logo.png' %}" alt="Logo Nouvel Hôpital">
     </a>
 
     <nav class="nav-links">
@@ -41,85 +41,62 @@
       </p>
     </section>
 
-    <section class="filters-box">
+    <form method="GET" class="filters-box">
       <div class="filter-item">
         <label for="search-room">Recherche</label>
-        <input type="text" id="search-room" placeholder="Nom de la salle">
+        <input
+          type="text"
+          id="search-room"
+          name="q"
+          placeholder="Nom de la salle"
+          value="{{ request.GET.q }}"
+        >
       </div>
 
       <div class="filter-item">
         <label for="room-type">Type</label>
-        <select id="room-type">
-          <option>Tous</option>
-          <option>Chambre</option>
-          <option>Bloc opératoire</option>
-          <option>Consultation</option>
-          <option>Réanimation</option>
-        </select>
-      </div>
+        <select id="room-type" name="service">
+          <option value="">Tous</option>
 
-      <div class="filter-item">
-        <label for="room-state">Statut</label>
-        <select id="room-state">
-          <option>Tous</option>
-          <option>Libre</option>
-          <option>Occupée</option>
-          <option>Maintenance</option>
-        </select>
+          {% for s in services %}
+            <option value="{{ s.id }}" {% if request.GET.service == s.id|stringformat:"s" %}selected{% endif %}>
+              {{ s.nom }}
+            </option>
+          {% endfor %}
+      </select>
       </div>
 
       <div class="filter-item">
         <label for="floor">Étage</label>
-        <select id="floor">
-          <option>Tous</option>
-          <option>RDC</option>
-          <option>1er étage</option>
-          <option>2e étage</option>
-          <option>3e étage</option>
+        <select id="floor" name="etage">
+          <option value="">Tous</option>
+          <option value="0" {% if request.GET.etage == "0" %}selected{% endif %}>RDC</option>
+          <option value="1" {% if request.GET.etage == "1" %}selected{% endif %}>1er étage</option>
+          <option value="2" {% if request.GET.etage == "2" %}selected{% endif %}>2e étage</option>
+          <option value="3" {% if request.GET.etage == "3" %}selected{% endif %}>3e étage</option>
         </select>
       </div>
-    </section>
+
+      <button type="submit" class="btn btn-primary">Filtrer</button>
+      
+
+    </form>
 
     <section class="room-grid">
-      <article class="room-card">
-        <div class="object-top">
-          <h3>Chambre 101</h3>
-          <span class="status active">Libre</span>
-        </div>
-        <p><strong>Type :</strong> Chambre</p>
-        <p><strong>Étage :</strong> 1er étage</p>
-        <p><strong>Capacité :</strong> 1 lit</p>
-      </article>
+      {% for salle in salles %}
+        <article class="room-card">
+          <div class="object-top">
+            <h3>{{ salle.nom }}</h3>
+           <span class="status active">Disponible</span>
+          </div>
 
-      <article class="room-card">
-        <div class="object-top">
-          <h3>Chambre 204</h3>
-          <span class="status warning">Occupée</span>
-        </div>
-        <p><strong>Type :</strong> Chambre</p>
-        <p><strong>Étage :</strong> 2e étage</p>
-        <p><strong>Capacité :</strong> 2 lits</p>
-      </article>
-
-      <article class="room-card">
-        <div class="object-top">
-          <h3>Bloc opératoire A</h3>
-          <span class="status active">Disponible</span>
-        </div>
-        <p><strong>Type :</strong> Bloc opératoire</p>
-        <p><strong>Étage :</strong> RDC</p>
-        <p><strong>Spécialité :</strong> Chirurgie</p>
-      </article>
-
-      <article class="room-card">
-        <div class="object-top">
-          <h3>Salle consultation 12</h3>
-          <span class="status inactive">Maintenance</span>
-        </div>
-        <p><strong>Type :</strong> Consultation</p>
-        <p><strong>Étage :</strong> 1er étage</p>
-        <p><strong>Service :</strong> Cardiologie</p>
-      </article>
+          <p><strong>Service :</strong> {{ salle.service.nom }}</p>
+          <p><strong>Étage :</strong> {{ salle.etage }}</p>
+        </article>
+      {% empty %}
+        <p>Aucune salle enregistrée.</p>
+      {% endfor %}
+     
     </section>
   </div>
 </main>

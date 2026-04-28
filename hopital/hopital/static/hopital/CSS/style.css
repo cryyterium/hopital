@@ -929,6 +929,10 @@ img{
   }
 
   .filters-box{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: flex-end;
     grid-template-columns:1fr 1fr;
   }
 }
@@ -1085,5 +1089,21 @@ img{
     flex-direction:column;
   }
 
+  .filters-box {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 12px !important;
+    align-items: flex-end !important;
+  }
+
+  .filters-box .btn,
+  .filters-box button {
+    width: auto !important;
+    max-width: 120px !important;
+   padding: 6px 12px !important;
+    font-size: 14px !important;
+    flex: 0 0 auto !important;
+  }
   
 }
+ 

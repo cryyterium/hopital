@@ -97,3 +97,13 @@ function previousDay() {
 }
 
 document.addEventListener("DOMContentLoaded", renderMenuDay);
+
+function toggleForm() {
+  const form = document.getElementById("editForm");
+
+  if (form.style.display === "none" || form.style.display === "") {
+    form.style.display = "block";
+  } else {
+    form.style.display = "none";
+  }
+}

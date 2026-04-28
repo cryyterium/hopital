@@ -13,4 +13,5 @@ urlpatterns = [
     path('manage-users/', views.manage_users, name='manage_users'),
     path('manage-objects/', views.manage_objects, name='manage_objects'),
     path('stats/', views.stats, name='stats'),
+    path("validate/<int:user_id>/", views.validate_email, name="validate_email"),
 ]

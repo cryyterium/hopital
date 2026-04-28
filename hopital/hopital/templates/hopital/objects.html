@@ -12,7 +12,7 @@
 <header class="navbar">
   <div class="container nav-container">
     <a href="{% url 'index' %}" class="logo">
-      <img src="images/logo.png" alt="Logo Nouvel Hôpital">
+      <img src="{% static 'hopital/photo/logo.png' %}" alt="Logo Nouvel Hôpital">
     </a>
 
     <nav class="nav-links">
@@ -43,46 +43,54 @@
       </div>
     </section>
 
-    <section class="filters-box">
+    <form method="GET" class="filters-box">
       <div class="filter-item">
         <label for="search">Recherche</label>
-        <input type="text" id="search" placeholder="Nom ou description de l’objet">
+        <input
+          type="text"
+          id="search"
+          name="q"
+          placeholder="Nom ou description de l’objet"
+          value="{{ request.GET.q }}"
+        >
       </div>
 
       <div class="filter-item">
         <label for="type">Type</label>
-        <select id="type">
-          <option>Tous</option>
-          <option>Lit connecté</option>
-          <option>Moniteur cardiaque</option>
-          <option>Capteur température</option>
-          <option>Caméra</option>
+        <select id="type" name="type">
+          <option value="">Tous</option>
+          <option value="capteur" {% if request.GET.type == "capteur" %}selected{% endif %}>Capteur</option>
+          <option value="pompe" {% if request.GET.type == "pompe" %}selected{% endif %}>Pompe</option>
+          <option value="moniteur" {% if request.GET.type == "moniteur" %}selected{% endif %}>Moniteur</option>
         </select>
       </div>
 
       <div class="filter-item">
         <label for="state">État</label>
-        <select id="state">
-          <option>Tous</option>
-          <option>Actif</option>
-          <option>Inactif</option>
-          <option>Maintenance</option>
+        <select id="state" name="etat">
+          <option value="">Tous</option>
+          <option value="actif" {% if request.GET.etat == "actif" %}selected{% endif %}>Actif</option>
+          <option value="inactif" {% if request.GET.etat == "inactif" %}selected{% endif %}>Inactif</option>
+          <option value="maintenance" {% if request.GET.etat == "maintenance" %}selected{% endif %}>Maintenance</option>
         </select>
       </div>
 
       <div class="filter-item">
         <label for="room">Salle</label>
-        <select id="room">
-          <option>Toutes</option>
-          <option>Chambre 101</option>
-          <option>Chambre 204</option>
-          <option>Bloc A</option>
-          <option>Couloir urgences</option>
+        <select id="room" name="salle">
+          <option value="">Toutes</option>
+          {% for salle in salles %}
+            <option value="{{ salle.id }}" {% if request.GET.salle == salle.id|stringformat:"s" %}selected{% endif %}>
+          {% endfor %}
         </select>
       </div>
-    </section>
 
-    
+      <div class="filter-item filter-button">
+        <button type="submit" class="btn btn-primary">Filtrer</button>
+      </div>
+    </form>
+
+        
 
     <section class="object-grid">
       {% for objet in objets %}

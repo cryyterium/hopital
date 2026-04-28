@@ -12,8 +12,7 @@
 <header class="navbar">
   <div class="container nav-container">
     <a href="{% url 'index' %}" class="logo">
-      <img src="images/logo.png" alt="Logo Nouvel Hôpital">
-      <span>Nouvel Hôpital</span>
+      <img src="{% static 'hopital/photo/logo.png' %}" alt="Logo Nouvel Hôpital">
     </a>
 
     <nav class="nav-links">
@@ -36,7 +35,7 @@
 <section class="dashboard-hero">
   <div>
     <span class="tag">Utilisateur connecté</span>
-    <h1>Bienvenue, [Prénom]</h1>
+    <h1>Bienvenue, {{ request.user.username }}</h1>
     <p>
       Accédez à vos informations, vos objets connectés et suivez votre progression sur la plateforme.
     </p>
@@ -44,8 +43,8 @@
 
   <div class="level-box">
     <p class="level-label">Niveau actuel</p>
-    <h3>[Niveau]</h3>
-    <p class="level-points">[Points] / [Objectif] points</p>
+    <h3>{{ profil.niveau }}</h3>
+    <p class="level-points">{{ points }} points</p>
     <div class="progress-bar">
       <div class="progress-fill" style="width: 60%;"></div>
     </div>
@@ -55,25 +54,25 @@
 <section class="dashboard-cards">
   <div class="dash-card">
     <span class="dash-label">Lits disponibles</span>
-    <strong>[Nombre]</strong>
+    <strong>{{ lits_disponibles }}</strong>
     <p>Capacité actuelle</p>
   </div>
 
   <div class="dash-card">
     <span class="dash-label">Objets connectés</span>
-    <strong>[Nombre]</strong>
+    <strong>{{ nb_objets }}</strong>
     <p>Objets enregistrés</p>
   </div>
 
   <div class="dash-card">
     <span class="dash-label">Salles</span>
-    <strong>[Nombre]</strong>
+    <strong>{{ nb_salles }}</strong>
     <p>Zones suivies</p>
   </div>
 
   <div class="dash-card">
     <span class="dash-label">Points</span>
-    <strong>[Points]</strong>
+    <strong>{{ points }}</strong>
     <p>Progression utilisateur</p>
   </div>
 </section>
@@ -84,8 +83,19 @@
     <ul class="profile-list">
       <li><strong>Information :</strong> oui</li>
       <li><strong>Visualisation :</strong> oui</li>
-      <li><strong>Gestion :</strong> non</li>
-      <li><strong>Administration :</strong> non</li>
+      
+      {% if profil.niveau == "avancé" or profil.niveau == "expert" %}
+        <li><strong>Gestion :</strong> oui</li>
+      {% else %}
+        <li><strong>Gestion :</strong> non</li>
+      {% endif %}
+
+      {% if profil.niveau == "expert" %}
+        <li><strong>Administration :</strong> oui</li>
+      {% else %}
+        <li><strong>Administration :</strong> non</li>
+      {% endif %}
+
     </ul>
   </div>
 </section>

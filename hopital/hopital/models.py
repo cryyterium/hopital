@@ -40,6 +40,7 @@ class Profil(models.Model):
     nb_actions = models.IntegerField(default=0)
     statut = models.CharField(max_length=20, default='non validé')
     date_inscription = models.DateTimeField(auto_now_add=True)
+    valide = models.BooleanField(default=False)
 
     def __str__(self):
         return self.user.username
