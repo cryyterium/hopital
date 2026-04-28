@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
@@ -36,7 +36,7 @@ def login_view(request):
 
     return render(request, "hopital/login.html")
 
-    
+
 def register(request):
     if request.method == "POST":
         username = request.POST.get("username")
@@ -111,20 +111,44 @@ def profile(request):
     profil, created = Profil.objects.get_or_create(user=request.user)
 
     points = profil.nb_connexions * 0.25 + profil.nb_actions * 0.50
+    error = None
+    success = None
 
     if request.method == "POST":
-        request.user.first_name = request.POST.get("prenom")
-        request.user.last_name = request.POST.get("nom")
-        request.user.email = request.POST.get("email")
-        request.user.save()
+        action = request.POST.get("action")
 
-        profil.age = request.POST.get("age") or None
-        profil.genre = request.POST.get("genre")
-        profil.type_membre = request.POST.get("type_membre")
-        profil.save()
+        if action == "profile":
+            request.user.first_name = request.POST.get("prenom")
+            request.user.last_name = request.POST.get("nom")
+            request.user.email = request.POST.get("email")
+            request.user.save()
 
-        return redirect("profile")
-    return render(request, 'hopital/profile.html', {"profil": profil,"points": points})
+            profil.age = request.POST.get("age") or None
+            profil.genre = request.POST.get("genre")
+            profil.save()
+
+            success = "Profil modifié avec succès."
+
+        elif action == "password":
+            old_password = request.POST.get("old_password")
+            new_password = request.POST.get("new_password")
+            confirm_password = request.POST.get("confirm_password")
+
+            if not request.user.check_password(old_password):
+                error = "Ancien mot de passe incorrect."
+            elif new_password != confirm_password:
+                error = "Les nouveaux mots de passe ne correspondent pas."
+            else:
+                request.user.set_password(new_password)
+                request.user.save()
+                update_session_auth_hash(request, request.user)
+                success = "Mot de passe modifié avec succès."
+
+    return render(request, 'hopital/profile.html', {
+        "profil": profil,
+        "points": points,
+        "error": error,
+        "success": success,})
 
 @login_required
 def objects(request):
