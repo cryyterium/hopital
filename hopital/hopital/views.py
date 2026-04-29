@@ -1,16 +1,30 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login, update_session_auth_hash
+from django.contrib.auth import authenticate, login, update_session_auth_hash,logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
+from django.db.models import Sum,Q
 from django.conf import settings
 from django.urls import reverse
 
 # Create your views here.
-from .models import ObjetConnecte, Salle, Profil, Service
+from .models import ObjetConnecte, Salle, Profil, Service, HistoriqueConnexion
 
 def index(request):
-    return render(request, 'hopital/index.html')
+    nb_salles = Salle.objects.count()
+    nb_services = Service.objects.count()
+    nb_objets = ObjetConnecte.objects.count()
+    total_lits = Salle.objects.aggregate(Sum("nombre_lits"))["nombre_lits__sum"] or 0
+    lits_occupes = Salle.objects.aggregate(Sum("lits_occupes"))["lits_occupes__sum"] or 0
+    lits_disponibles = total_lits - lits_occupes
+
+
+    return render(request, 'hopital/index.html', {"nb_salles": nb_salles,
+                                                    "nb_services": nb_services,
+                                                    "nb_objets": nb_objets,
+                                                    "total_lits": total_lits,
+                                                    "lits_occupes": lits_occupes,
+                                                    "lits_disponibles": lits_disponibles,})
 
 def login_view(request):
     if request.method == "POST":
@@ -28,6 +42,17 @@ def login_view(request):
                 })
 
             login(request, user)
+
+            profil.nb_connexions += 1
+            profil.save()
+
+            HistoriqueConnexion.objects.create(
+                profil=profil,
+                points_gagnes=0.25
+            )
+
+            maj_niveau(profil)
+
             return redirect("dashboard")
 
         return render(request, "hopital/login.html", {
@@ -35,6 +60,10 @@ def login_view(request):
         })
 
     return render(request, "hopital/login.html")
+
+def logout_view(request):
+    logout(request)
+    return redirect("index")
 
 
 def register(request):
@@ -93,9 +122,30 @@ def dashboard(request):
 
     nb_objets = ObjetConnecte.objects.count()
     nb_salles = Salle.objects.count()
-    lits_disponibles = Salle.objects.count()
+    total_lits = Salle.objects.aggregate(Sum("nombre_lits"))["nombre_lits__sum"] or 0
+    lits_occupes = Salle.objects.aggregate(Sum("lits_occupes"))["lits_occupes__sum"] or 0
+    lits_disponibles = total_lits - lits_occupes
 
     points = profil.nb_connexions * 0.25 + profil.nb_actions * 0.50
+    if profil.niveau == "débutant":
+        points_min = 0
+        points_max = 5
+    elif profil.niveau == "intermediaire":
+        points_min = 5
+        points_max = 10
+    elif profil.niveau == "avancé":
+        points_min = 10
+        points_max = 20
+    else:
+        points_min = 20
+        points_max = 20
+
+    if points_max > points_min:
+        progression = ((points - points_min) / (points_max - points_min)) * 100
+    else:
+        progression = 100
+
+    progression = max(0, min(progression, 100))
 
     context = {
         "profil": profil,
@@ -103,6 +153,7 @@ def dashboard(request):
         "nb_salles": nb_salles,
         "lits_disponibles": lits_disponibles,
         "points": points,
+        "progression": progression,
     }
     return render(request, "hopital/dashboard.html", context)
 
@@ -125,9 +176,16 @@ def profile(request):
 
             profil.age = request.POST.get("age") or None
             profil.genre = request.POST.get("genre")
+
+            # +0.5 point car modification du profil
+            profil.nb_actions += 1
+
+            # Mise à jour du niveau
+            maj_niveau(profil)
+            
             profil.save()
 
-            success = "Profil modifié avec succès."
+            success = "Profil modifié avec succès. Vous avez gagné 0.5 point."
 
         elif action == "password":
             old_password = request.POST.get("old_password")
@@ -142,11 +200,51 @@ def profile(request):
                 request.user.set_password(new_password)
                 request.user.save()
                 update_session_auth_hash(request, request.user)
-                success = "Mot de passe modifié avec succès."
+
+                # +0.5 point car changement de mot de passe
+                profil.nb_actions += 1
+
+                maj_niveau(profil)
+
+                profil.save()
+
+                success = "Mot de passe modifié avec succès. Vous avez gagné 0.5 point."
+    
+    points = profil.nb_connexions * 0.25 + profil.nb_actions * 0.50
+
+    if profil.niveau == "débutant":
+        prochain_niveau = "intermediaire"
+        points_requis = 5
+        points_min = 0
+        progression = ((points - points_min) / (points_requis - points_min)) * 100
+    elif profil.niveau == "intermediaire":
+        prochain_niveau = "avancé"
+        points_requis = 10
+        points_min = 5
+        progression = ((points - points_min) / (points_requis - points_min)) * 100
+    elif profil.niveau == "avancé":
+        prochain_niveau = "expert"
+        points_requis = 20
+        points_min = 10
+        progression = ((points - points_min) / (points_requis - points_min)) * 100
+    else:
+        prochain_niveau = "max"
+        points_requis = 0
+        progression = 100
+    
+    progression = max(0, min(progression, 100))
+
+    points_restants = max(points_requis - points, 0)
+        
 
     return render(request, 'hopital/profile.html', {
         "profil": profil,
         "points": points,
+        "points": points,
+        "prochain_niveau": prochain_niveau,
+        "points_requis": points_requis,
+        "points_restants": points_restants,
+        "progression": progression,
         "error": error,
         "success": success,})
 
@@ -225,6 +323,7 @@ def manage_objects(request):
                 etat=request.POST.get("etat"),
                 salle_id=request.POST.get("salle")
             )
+            profil.nb_actions += 1
 
         elif action == "edit":
             objet = ObjetConnecte.objects.get(id=request.POST.get("objet_id"))
@@ -233,10 +332,14 @@ def manage_objects(request):
             objet.etat = request.POST.get("etat")
             objet.salle_id = request.POST.get("salle")
             objet.save()
+            profil.nb_actions += 1
 
         elif action == "delete":
             objet = ObjetConnecte.objects.get(id=request.POST.get("objet_id"))
             objet.delete()
+            profil.nb_actions += 1
+
+        maj_niveau(profil)
 
         return redirect("manage_objects")
 
@@ -257,3 +360,19 @@ def validate_email(request, user_id):
     profil.save()
 
     return redirect("login")
+
+
+def maj_niveau(profil):
+
+    points = profil.nb_connexions * 0.25 + profil.nb_actions * 0.50
+
+    if points >= 20:
+        profil.niveau = "expert"
+    elif points >= 10:
+        profil.niveau = "avancé"
+    elif points >= 5:
+        profil.niveau = "intermediaire"
+    else:
+        profil.niveau = "débutant"
+
+    profil.save()

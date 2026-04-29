@@ -29,7 +29,7 @@
 
 <div class="page-tools">
   <a href="{% url 'index' %}">Retour à l’accueil</a>
-  <a href="{% url 'login' %}">Déconnexion</a>
+  <a href="{% url 'logout' %}">Déconnexion</a>
 </div>
 
 <section class="dashboard-hero">
@@ -46,8 +46,7 @@
     <h3>{{ profil.niveau }}</h3>
     <p class="level-points">{{ points }} points</p>
     <div class="progress-bar">
-      <div class="progress-fill" style="width: 60%;"></div>
-    </div>
+      <div class="progress-fill" style="--progression: {{ progression|default:0|floatformat:0 }}%;"></div>
   </div>
 </section>
 

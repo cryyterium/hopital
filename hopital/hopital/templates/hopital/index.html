@@ -23,8 +23,13 @@
       </nav>
 
       <div class="nav-actions">
-        <a href="{% url 'login' %}"" class="btn btn-light">Connexion</a>
-        <a href="{% url 'register' %}" class="btn btn-primary">Inscription</a>
+        {% if request.user.is_authenticated %}
+          <a href="{% url 'dashboard' %}" class="btn btn-primary">Dashboard</a>
+          <a href="{% url 'logout' %}" class="btn btn-light">Déconnexion</a>
+        {% else %}
+          <a href="{% url 'login' %}" class="btn btn-light">Connexion</a>
+          <a href="{% url 'register' %}" class="btn btn-primary">Inscription</a>
+        {% endif %}
       </div>
     </div>
   </header>
@@ -42,8 +47,13 @@
           </p>
 
           <div class="hero-buttons">
-            <a href="{% url 'register' %}" class="btn btn-primary">Créer un compte</a>
-            <a href="{% url 'login' %}"" class="btn btn-secondary">Connexion</a>
+            {% if request.user.is_authenticated %}
+              <a href="{% url 'dashboard' %}" class="btn btn-primary">Accéder au dashboard</a>
+              <a href="{% url 'objects' %}" class="btn btn-secondary">Voir les objets</a>
+            {% else %}
+              <a href="{% url 'register' %}" class="btn btn-primary">Créer un compte</a>
+              <a href="{% url 'login' %}" class="btn btn-secondary">Connexion</a>
+            {% endif %}
           </div>
         </div>
       </div>
@@ -54,22 +64,22 @@
         <div class="stats-grid">
           <div class="stat-card-modern">
             <span class="metric-label">Lits totaux</span>
-            <strong>350</strong>
+            <strong>{{ total_lits }}</strong>
           </div>
 
           <div class="stat-card-modern">
             <span class="metric-label">Lits disponibles</span>
-            <strong>48</strong>
+            <strong>{{ lits_disponibles }}</strong>
           </div>
 
           <div class="stat-card-modern">
             <span class="metric-label">Services actifs</span>
-            <strong>7</strong>
+            <strong>{{ nb_services }}</strong>
           </div>
 
           <div class="stat-card-modern">
-            <span class="metric-label">Zones surveillées</span>
-            <strong>42</strong>
+            <span class="metric-label">Objets connectés</span>
+            <strong>{{ nb_objets }}</strong>
           </div>
         </div>
       </div>
@@ -246,15 +256,16 @@
           <div class="resource-card">
             <h3>Gestion des salles</h3>
             <ul>
-              <li>Chambres disponibles : 48</li>
-              <li>Chambres occupées : 214</li>
-              <li>Salles de consultation : 19</li>
-              <li>Blocs opératoires : 6</li>
+              <li>Chambres disponibles : {{ lits_disponibles }}</li>
+              <li>Chambres occupées : {{ lits_occupes }}</li>
+              <li>Salles de réanimations : 2</li>
             </ul>
           </div>
         </div>
       </div>
     </section>
+
+    {% if not request.user.is_authenticated %}
 
     <section class="section cta-section">
       <div class="container">
@@ -272,6 +283,8 @@
         </div>
       </div>
     </section>
+    {% endif %}
+
   </main>
 
   <footer class="footer">
@@ -283,8 +296,10 @@
 
       <div class="footer-links">
         <a href="#">Accueil</a>
+        {% if not request.user.is_authenticated %}
         <a href="{% url 'login' %}">Connexion</a>
         <a href="{% url 'register' %}">Inscription</a>
+        {% endif %}
       </div>
     </div>
   </footer>

@@ -29,7 +29,7 @@
 
     <div class="page-tools">
       <a href="{% url 'dashboard' %}">Retour au dashboard</a>
-      <a href="{% url 'login' %}">Déconnexion</a>
+      <a href="{% url 'logout' %}">Déconnexion</a>
     </div>
 
     <section class="profile-header">
@@ -66,14 +66,15 @@
       <div class="profile-card">
         <h2>Niveau et points</h2>
         <ul class="profile-list">
-          <li><strong>Niveau actuel :</strong> {{ profil.niveau }}</li>
-          <li><strong>Points :</strong> {{ points }}</li>
-          <li><strong>Prochain niveau :</strong> {{ profil.nb_connexions }}</li>
-          <li><strong>Points requis :</strong> {{ profil.nb_actions }}</li>
+            <li><strong>Niveau actuel :</strong> {{ profil.niveau }}</li>
+            <li><strong>Points :</strong> {{ points }}</li>
+            <li><strong>Prochain niveau :</strong> {{ prochain_niveau }}</li>
+            <li><strong>Points requis :</strong> {{ points_requis }}</li>
+            <li><strong>Points restants :</strong> {{ points_restants }}</li>
         </ul>
 
         <div class="progress-bar">
-          <div class="progress-fill" style="width: 60%;"></div>
+          <div class="progress-fill" style="width: {{ progression|floatformat:0|default:0 }}%;"></div>
         </div>
       </div>
 

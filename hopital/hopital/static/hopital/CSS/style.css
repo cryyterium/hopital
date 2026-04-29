@@ -1142,3 +1142,8 @@ img{
   overflow-y: auto;
   padding-right: 8px;
 }
+
+.progress-fill {
+  background:#3f6d62 !important;
+  width: var(--progression);
+}

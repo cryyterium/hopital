@@ -22,9 +22,14 @@ class Salle(models.Model):
     etage = models.IntegerField(blank=True, null=True)
     service = models.ForeignKey(Service, on_delete=models.SET_NULL, blank=True, null=True)
 
+    nombre_lits = models.IntegerField(default=0)
+    lits_occupes = models.IntegerField(default=0)
 
     def __str__(self):
         return self.nom
+    
+    def lits_disponibles(self):
+        return self.nombre_lits - self.lits_occupes
 
 
 class Profil(models.Model):
