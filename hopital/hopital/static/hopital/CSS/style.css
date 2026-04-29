@@ -1196,3 +1196,48 @@ img{
   min-height: 70px;
   resize: vertical;
 }
+
+.filters-box {
+  margin-bottom: 20px;
+}
+
+.filters-box {
+  display: flex;
+  align-items: flex-end;
+  gap: 15px;
+}
+
+.filter-item {
+  flex: 1;
+}
+
+.filter-button {
+  flex: none;
+}
+
+.filter-button .btn {
+  height: 48px; /* même hauteur que l’input */
+}
+
+.form-col {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 420px;
+}
+
+.form-col input,
+.form-col select {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.profile-card {
+  margin-bottom: 20px;
+}

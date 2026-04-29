@@ -17,6 +17,7 @@
 
     <nav class="nav-links">
       <a href="{% url 'dashboard' %}">Dashboard</a>
+      <a href="{% url 'members' %}">Membres</a>
       <a href="{% url 'objects' %}">Objets</a>
       <a href="{% url 'room' %}">Salles</a>
       <a href="{% url 'profile' %}">Profil</a>
@@ -153,6 +154,10 @@
           {% if objet.derniere_interaction %}
             <p><strong>Dernière interaction :</strong> {{ objet.derniere_interaction }}</p>
           {% endif %}
+          
+          <a href="{% url 'objet_detail' objet.id %}" class="btn btn-secondary">
+          Voir détail
+          </a>
 
         </article>
       {% empty %}

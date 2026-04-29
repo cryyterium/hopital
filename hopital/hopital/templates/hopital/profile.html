@@ -17,6 +17,7 @@
 
     <nav class="nav-links">
       <a href="{% url 'dashboard' %}">Dashboard</a>
+      <a href="{% url 'members' %}">Membres</a>
       <a href="{% url 'objects' %}">Objets</a>
       <a href="{% url 'room' %}">Salles</a>
       <a href="{% url 'profile' %}">Profil</a>
@@ -85,33 +86,28 @@
         </button>
         <div id="editForm" style="display: none;" class="profile-card">
           
-          <form method="POST" class="profile-actions">
+          <form method="POST" class="form-col">
           {% csrf_token %}
           <input type="hidden" name="action" value="profile">
 
-          <input type="text" name="nom" value="{{ request.user.last_name }}" placeholder="Nom">
-          <input type="text" name="prenom" value="{{ request.user.first_name }}" placeholder="Prénom">
-          <input type="email" name="email" value="{{ request.user.email }}" placeholder="Email">
+          <label>Nom</label>
+          <input type="text" name="nom" value="{{ request.user.last_name }}">
 
-          <input type="number" name="age" value="{{ profil.age }}" placeholder="Âge">
+          <label>Prénom</label>
+          <input type="text" name="prenom" value="{{ request.user.first_name }}">
+
+          <label>Email</label>
+          <input type="email" name="email" value="{{ request.user.email }}">
+
+          <label>Âge</label>
+          <input type="number" name="age" value="{{ profil.age }}">
+
+          <label>Genre</label>
           <select name="genre">
             <option value="">Sélectionner</option>
-
-            <option value="Homme" {% if profil.genre == "Homme" %}selected{% endif %}>
-              Homme
-            </option>
-
-            <option value="Femme" {% if profil.genre == "Femme" %}selected{% endif %}>
-              Femme
-            </option>
-
-            <option value="Autre" {% if profil.genre == "Autre" %}selected{% endif %}>
-              Autre
-            </option>
-
-            <option value="Non précisé" {% if profil.genre == "Non précisé" %}selected{% endif %}>
-             Non précisé
-            </option>
+            <option value="Homme" {% if profil.genre == "Homme" %}selected{% endif %}>Homme</option>
+            <option value="Femme" {% if profil.genre == "Femme" %}selected{% endif %}>Femme</option>
+            <option value="Autre" {% if profil.genre == "Autre" %}selected{% endif %}>Autre</option>
           </select>
           <button type="submit" class="btn btn-primary">Enregistrer</button>
           <button type="button" onclick="toggleForm()" class="btn btn-secondary">Annuler</button>

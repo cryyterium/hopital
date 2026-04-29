@@ -16,6 +16,7 @@
 
     <nav class="nav-links">
       <a href="{% url 'dashboard' %}">Dashboard</a>
+      <a href="{% url 'members' %}">Membres</a>
       <a href="{% url 'objects' %}">Objets</a>
       <a href="{% url 'room' %}">Salles</a>
       <a href="{% url 'profile' %}">Profil</a>
@@ -30,6 +31,27 @@
       <a href="{% url 'dashboard' %}">Retour au dashboard</a>
       <a href="{% url 'logout' %}">Déconnexion</a>
     </div>
+
+    <section class="objects-top">
+      <span class="tag"> Recherche membres</span>
+      
+    </section>
+
+    <form method="GET" class="filters-box">
+        <div class="filter-item">
+            <label>Recherche membre</label>
+            <input 
+            type="text" 
+            name="q" 
+            placeholder="Nom d'utilisateur"
+            value="{{ request.GET.q }}"
+            >
+        </div>
+
+        <div class="filter-item filter-button">
+            <button type="submit" class="btn btn-primary">Rechercher</button>
+        </div>
+    </form>
 
     <section class="objects-top">
       <span class="tag">Membres</span>

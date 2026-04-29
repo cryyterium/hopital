@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, update_session_auth_hash,logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -8,7 +8,7 @@ from django.conf import settings
 from django.urls import reverse
 
 # Create your views here.
-from .models import ObjetConnecte, Salle, Profil, Service, HistoriqueConnexion
+from .models import ObjetConnecte, Salle, Profil, Service, HistoriqueConnexion, HistoriqueAction
 
 def index(request):
     nb_salles = Salle.objects.count()
@@ -125,6 +125,18 @@ def dashboard(request):
     total_lits = Salle.objects.aggregate(Sum("nombre_lits"))["nombre_lits__sum"] or 0
     lits_occupes = Salle.objects.aggregate(Sum("lits_occupes"))["lits_occupes__sum"] or 0
     lits_disponibles = total_lits - lits_occupes
+    connexions = HistoriqueConnexion.objects.filter(profil=profil).order_by("-date_heure")[:5]
+    actions = HistoriqueAction.objects.filter(profil=profil).order_by("-date_heure")[:5]
+    actifs = ObjetConnecte.objects.filter(etat="actif").count()
+    maintenance = ObjetConnecte.objects.filter(etat="maintenance").count()
+    batterie_faible = ObjetConnecte.objects.filter(niveau_batterie__lt=20).count()
+
+    total = ObjetConnecte.objects.count()
+
+    if total > 0:
+        taux_maintenance = (maintenance / total) * 100
+    else:
+        taux_maintenance = 0
 
     points = profil.nb_connexions * 0.25 + profil.nb_actions * 0.50
     if profil.niveau == "débutant":
@@ -154,6 +166,12 @@ def dashboard(request):
         "lits_disponibles": lits_disponibles,
         "points": points,
         "progression": progression,
+        "connexions": connexions,
+        "actions": actions,
+        "actifs": actifs,
+        "maintenance": maintenance,
+        "batterie_faible": batterie_faible,
+        "taux_maintenance": taux_maintenance,
     }
     return render(request, "hopital/dashboard.html", context)
 
@@ -317,7 +335,7 @@ def manage_objects(request):
         action = request.POST.get("action")
 
         if action == "add":
-            ObjetConnecte.objects.create(
+            objet =ObjetConnecte.objects.create(
                 nom=request.POST.get("nom"),
                 type=request.POST.get("type"),
                 etat=request.POST.get("etat"),
@@ -327,6 +345,12 @@ def manage_objects(request):
                 description=request.POST.get("description"),
                 marque=request.POST.get("marque"),
             )
+            HistoriqueAction.objects.create(
+                profil=profil,
+                objet=objet,
+                type_action="ajout"
+            )
+
             profil.nb_actions += 1
 
         elif action == "edit":
@@ -342,8 +366,19 @@ def manage_objects(request):
             objet.save()
             profil.nb_actions += 1
 
+            HistoriqueAction.objects.create(
+                profil=profil,
+                objet=objet,
+                type_action="modification"
+            )
+
         elif action == "delete":
             objet = ObjetConnecte.objects.get(id=request.POST.get("objet_id"))
+            HistoriqueAction.objects.create(
+                profil=profil,
+                objet=objet,
+                type_action="suppression"
+            )
             objet.delete()
             profil.nb_actions += 1
 
@@ -389,6 +424,24 @@ def maj_niveau(profil):
 def members(request):
     profils = Profil.objects.select_related("user").all()
 
+    q = request.GET.get("q")
+
+    if q:
+        profils = profils.filter(user__username__icontains=q)
+
     return render(request, "hopital/members.html", {
         "profils": profils
     })
+
+@login_required
+def objet_detail(request, id):
+    profil, created = Profil.objects.get_or_create(user=request.user)
+    objet = get_object_or_404(ObjetConnecte, id=id)
+
+    HistoriqueAction.objects.create(
+        profil=profil,
+        objet=objet,
+        type_action="consultation"
+    )
+
+    return render(request, "hopital/objet_detail.html", {"objet": objet})

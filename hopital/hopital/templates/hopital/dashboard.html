@@ -17,6 +17,7 @@
 
     <nav class="nav-links">
       <a href="{% url 'dashboard' %}">Dashboard</a>
+      <a href="{% url 'members' %}">Membres</a>
       <a href="{% url 'objects' %}">Objets</a>
       <a href="{% url 'room' %}">Salles</a>
       <a href="{% url 'profile' %}">Profil</a>
@@ -120,6 +121,65 @@
       <h3>Salles</h3>
       <p>Consulter les chambres, salles et zones de l’hôpital.</p>
     </a>
+  </div>
+</section>
+
+{% if profil.niveau == "avancé" or profil.niveau == "expert" %}
+
+<section class="section-small">
+  <div class="section-heading small">
+    <span class="tag">Statistiques</span>
+    <h2>Analyse des objets</h2>
+  </div>
+
+  <div class="quick-grid">
+    <div class="quick-card">
+      <h3>Objets actifs</h3>
+      <p>{{ actifs }}</p>
+    </div>
+
+    <div class="quick-card">
+      <h3>Objets en maintenance</h3>
+      <p>{{ maintenance }}</p>
+    </div>
+
+    <div class="quick-card">
+      <h3>Batteries faibles</h3>
+      <p>{{ batterie_faible }}</p>
+    </div>
+
+    <div class="quick-card">
+      <h3>Taux maintenance</h3>
+      <p>{{ taux_maintenance|floatformat:1 }}%</p>
+    </div>
+  </div>
+</section>
+
+{% endif %}
+
+<section class="section-small">
+  <h2>Historique</h2>
+
+  <div class="profile-card">
+    <h3>Dernières connexions</h3>
+    <ul>
+      {% for c in connexions %}
+        <li>{{ c.date_heure }}</li>
+      {% empty %}
+        <li>Aucune connexion</li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <div class="profile-card">
+    <h3>Dernières actions</h3>
+    <ul>
+      {% for a in actions %}
+        <li>{{ a.type_action }} - {{ a.objet.nom }}</li>
+      {% empty %}
+        <li>Aucune action</li>
+      {% endfor %}
+    </ul>
   </div>
 </section>
 

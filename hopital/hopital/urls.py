@@ -16,4 +16,5 @@ urlpatterns = [
     path("validate/<int:user_id>/", views.validate_email, name="validate_email"),
     path("logout/", views.logout_view, name="logout"),
     path("members/", views.members, name="members"),
+    path("objects/<int:id>/", views.objet_detail, name="objet_detail"),
 ]

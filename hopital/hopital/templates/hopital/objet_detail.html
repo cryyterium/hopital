@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ objet.nom }}</title>
+  <link rel="stylesheet" href="{% static 'hopital/CSS/style.css' %}">
+</head>
+<body>
+
+<main class="dashboard-page">
+  <div class="container">
+
+    <div class="page-tools">
+      <a href="{% url 'objects' %}">Retour aux objets</a>
+      <a href="{% url 'dashboard' %}">Dashboard</a>
+    </div>
+
+    <section class="profile-card">
+      <h1>{{ objet.nom }}</h1>
+
+      <p><strong>Type :</strong> {{ objet.type }}</p>
+      <p><strong>Description :</strong> {{ objet.description }}</p>
+      <p><strong>Marque :</strong> {{ objet.marque }}</p>
+      <p><strong>État :</strong> {{ objet.etat }}</p>
+      <p><strong>Connectivité :</strong> {{ objet.connectivite }}</p>
+      <p><strong>Batterie :</strong> {{ objet.niveau_batterie }}%</p>
+
+      {% if objet.salle %}
+        <p><strong>Salle :</strong> {{ objet.salle.nom }}</p>
+      {% endif %}
+
+      {% if objet.derniere_interaction %}
+        <p><strong>Dernière interaction :</strong> {{ objet.derniere_interaction }}</p>
+      {% endif %}
+    </section>
+
+  </div>
+</main>
+
+</body>
+</html>
