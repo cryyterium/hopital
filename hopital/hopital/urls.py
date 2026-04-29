@@ -15,4 +15,5 @@ urlpatterns = [
     path('stats/', views.stats, name='stats'),
     path("validate/<int:user_id>/", views.validate_email, name="validate_email"),
     path("logout/", views.logout_view, name="logout"),
+    path("members/", views.members, name="members"),
 ]

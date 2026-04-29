@@ -74,7 +74,7 @@
         </ul>
 
         <div class="progress-bar">
-          <div class="progress-fill" style="width: {{ progression|floatformat:0|default:0 }}%;"></div>
+          <div class="progress-fill" style="--progression: {{ progression|default:0|floatformat:0 }}%;"></div>
         </div>
       </div>
 

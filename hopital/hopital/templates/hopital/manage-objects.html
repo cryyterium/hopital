@@ -72,11 +72,23 @@
             <option value="maintenance">Maintenance</option>
           </select>
 
+          <label>Description</label>
+          <textarea name="description"></textarea>
+
+          <label>Marque</label>
+          <input name="marque" type="text">
+
+          <label>Connectivité</label>
+          <input name="connectivite" type="text">
+
+          <label>Batterie (%)</label>
+          <input name="niveau_batterie" type="number" min="0" max="100">
+
           <button class="btn btn-primary" type="submit">Ajouter</button>
         </form>
       </div>
 
-      <div class="profile-card">
+      <div class="profile-card objects-card">
         <h2>Tous les objets</h2>
         <div class="mini-list objects-scroll">
           {% for objet in objets %}
@@ -99,7 +111,7 @@
               </form>
             </div>
 
-            <form method="POST" id="edit-form-{{ objet.id }}" class="auth-form" style="display:none; margin:15px 0;">
+            <form method="POST" id="edit-form-{{ objet.id }}" class="auth-form edit-object-form" style="display:none;">
               {% csrf_token %}
               <input type="hidden" name="action" value="edit">
               <input type="hidden" name="objet_id" value="{{ objet.id }}">
@@ -129,6 +141,18 @@
                 <option value="inactif" {% if objet.etat == "inactif" %}selected{% endif %}>Inactif</option>
                 <option value="maintenance" {% if objet.etat == "maintenance" %}selected{% endif %}>Maintenance</option>
               </select>
+
+              <label>Description</label>
+              <textarea name="description">{{ objet.description }}</textarea>
+
+              <label>Marque</label>
+              <input type="text" name="marque" value="{{ objet.marque }}">
+
+              <label>Connectivité</label>
+              <input type="text" name="connectivite" value="{{ objet.connectivite }}">
+
+              <label>Batterie (%)</label>
+              <input type="number" name="niveau_batterie" value="{{ objet.niveau_batterie }}">
 
               <button type="submit" class="btn btn-primary">Enregistrer</button>
             </form>

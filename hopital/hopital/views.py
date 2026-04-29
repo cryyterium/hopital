@@ -321,7 +321,11 @@ def manage_objects(request):
                 nom=request.POST.get("nom"),
                 type=request.POST.get("type"),
                 etat=request.POST.get("etat"),
-                salle_id=request.POST.get("salle")
+                salle_id=request.POST.get("salle"),
+                connectivite=request.POST.get("connectivite"),
+                niveau_batterie=request.POST.get("niveau_batterie") or None,
+                description=request.POST.get("description"),
+                marque=request.POST.get("marque"),
             )
             profil.nb_actions += 1
 
@@ -331,6 +335,10 @@ def manage_objects(request):
             objet.type = request.POST.get("type")
             objet.etat = request.POST.get("etat")
             objet.salle_id = request.POST.get("salle")
+            objet.description = request.POST.get("description")
+            objet.marque = request.POST.get("marque")
+            objet.connectivite = request.POST.get("connectivite")
+            objet.niveau_batterie = request.POST.get("niveau_batterie") or None
             objet.save()
             profil.nb_actions += 1
 
@@ -376,3 +384,11 @@ def maj_niveau(profil):
         profil.niveau = "débutant"
 
     profil.save()
+
+@login_required
+def members(request):
+    profils = Profil.objects.select_related("user").all()
+
+    return render(request, "hopital/members.html", {
+        "profils": profils
+    })

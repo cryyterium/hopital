@@ -1147,3 +1147,52 @@ img{
   background:#3f6d62 !important;
   width: var(--progression);
 }
+
+.manage-grid {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 20px !important;
+  align-items: stretch !important;
+}
+
+
+.objects-scroll {
+  flex: 1 !important;
+  height: auto !important;
+  max-height: none !important;
+  overflow-y: auto !important;
+}
+
+.objects-card {
+  height: 700px;
+  display: flex;
+  flex-direction: column;
+}
+
+.objects-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 8px;
+}
+.objects-scroll .auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.objects-scroll .auth-form label {
+  display: block;
+  margin-top: 8px;
+}
+
+.objects-scroll .auth-form input,
+.objects-scroll .auth-form select,
+.objects-scroll .auth-form textarea {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.objects-scroll .auth-form textarea {
+  min-height: 70px;
+  resize: vertical;
+}

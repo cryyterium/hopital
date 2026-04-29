@@ -104,26 +104,60 @@
 
     <section class="object-grid">
       {% for objet in objets %}
-    <article class="object-card-modern">
-     <div class="object-top">
-        <h3>{{ objet.nom }}</h3>
+        <article class="object-card-modern">
 
-        {% if objet.etat == "actif" %}
-        <span class="status active">Actif</span>
-        {% else %}
-        <span class="status inactive">Inactif</span>
-        {% endif %}
-      </div>
+          <div class="object-top">
+            <h3>{{ objet.nom }}</h3>
 
-      <p>Type : {{ objet.type }}</p>
-      <p>Salle : {{ objet.salle.nom }}</p>
-      <p>Batterie : {{ objet.niveau_batterie }}%</p>
-      <p>Dernière interaction : {{ objet.derniere_interaction }}</p>
-    </article>
-    {% empty %}
-    <p>Aucun objet connecté trouvé.</p>
-    {% endfor %}
-      
+            {% if objet.etat == "actif" %}
+              <span class="status active">Actif</span>
+            {% elif objet.etat == "maintenance" %}
+              <span class="status warning">Maintenance</span>
+            {% else %}
+              <span class="status inactive">Inactif</span>
+            {% endif %}
+          </div>
+
+          <p><strong>Type :</strong> {{ objet.type }}</p>
+
+          {% if objet.description %}
+            <p><strong>Description :</strong> {{ objet.description }}</p>
+          {% endif %}
+
+          {% if objet.marque %}
+            <p><strong>Marque :</strong> {{ objet.marque }}</p>
+          {% endif %}
+
+          {% if objet.connectivite %}
+            <p><strong>Connectivité :</strong> {{ objet.connectivite }}</p>
+          {% endif %}
+
+          {% if objet.salle %}
+            <p><strong>Salle :</strong> {{ objet.salle.nom }}</p>
+          {% endif %}
+
+          {% if objet.niveau_batterie %}
+            <p>
+              <strong>Batterie :</strong>
+              <span class="
+                {% if objet.niveau_batterie < 20 %}status inactive
+                {% elif objet.niveau_batterie < 50 %}status warning
+                {% else %}status active
+                {% endif %}
+              ">
+                {{ objet.niveau_batterie }}%
+              </span>
+            </p>
+          {% endif %}
+
+          {% if objet.derniere_interaction %}
+            <p><strong>Dernière interaction :</strong> {{ objet.derniere_interaction }}</p>
+          {% endif %}
+
+        </article>
+      {% empty %}
+        <p>Aucun objet connecté trouvé.</p>
+      {% endfor %}
     </section>
   </div>
 </main>

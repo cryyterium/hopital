@@ -1,0 +1,60 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Membres - Nouvel Hôpital</title>
+  <link rel="stylesheet" href="{% static 'hopital/CSS/style.css' %}">
+</head>
+<body>
+
+<header class="navbar">
+  <div class="container nav-container">
+    <a href="{% url 'index' %}" class="logo">
+      <img src="{% static 'hopital/photo/logo.png' %}" alt="Logo Nouvel Hôpital">
+    </a>
+
+    <nav class="nav-links">
+      <a href="{% url 'dashboard' %}">Dashboard</a>
+      <a href="{% url 'objects' %}">Objets</a>
+      <a href="{% url 'room' %}">Salles</a>
+      <a href="{% url 'profile' %}">Profil</a>
+    </nav>
+  </div>
+</header>
+
+<main class="dashboard-page">
+  <div class="container">
+
+    <div class="page-tools">
+      <a href="{% url 'dashboard' %}">Retour au dashboard</a>
+      <a href="{% url 'logout' %}">Déconnexion</a>
+    </div>
+
+    <section class="objects-top">
+      <span class="tag">Membres</span>
+      <h1>Profils des membres</h1>
+      <p>Consultez les profils publics des utilisateurs de la plateforme.</p>
+    </section>
+
+    <section class="profile-grid">
+      {% for profil in profils %}
+        <div class="profile-card">
+          <h2>{{ profil.user.username }}</h2>
+          <ul class="profile-list">
+            <li><strong>Âge :</strong> {{ profil.age }}</li>
+            <li><strong>Genre :</strong> {{ profil.genre }}</li>
+            <li><strong>Type :</strong> {{ profil.type_membre }}</li>
+            <li><strong>Niveau :</strong> {{ profil.niveau }}</li>
+          </ul>
+        </div>
+      {% empty %}
+        <p>Aucun membre trouvé.</p>
+      {% endfor %}
+    </section>
+
+  </div>
+</main>
+
+</body>
+</html>
