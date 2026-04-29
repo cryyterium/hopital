@@ -1,6 +1,6 @@
 const menuWeeks = [
   {
-    title: "Semaine 1 — du lundi 27 avril au vendredi 1 mai",
+    title: "Semaine 27 avr → 1 mai",
     days: [
       { day: "Lundi", starter: "Salade de crudités", main: "Poulet rôti, légumes vapeur", dessert: "Compote de pommes" },
       { day: "Mardi", starter: "Soupe de légumes", main: "Poisson, riz parfumé", dessert: "Yaourt nature" },
@@ -10,7 +10,7 @@ const menuWeeks = [
     ]
   },
   {
-    title: "Semaine 2 — du lundi 4 mai au vendredi 8 mai",
+    title: "Semaine 4 mai → 8 mai",
     days: [
       { day: "Lundi", starter: "Tomates mozzarella", main: "Escalope de dinde, haricots verts", dessert: "Poire" },
       { day: "Mardi", starter: "Velouté de courgettes", main: "Cabillaud, semoule", dessert: "Crème dessert" },
@@ -20,7 +20,7 @@ const menuWeeks = [
     ]
   },
   {
-    title: "Semaine 3 — du lundi 11 mai au vendredi 15 mai",
+    title: "Semaine 11 mai → 15 mai",
     days: [
       { day: "Lundi", starter: "Salade de chou", main: "Poulet curry doux, riz", dessert: "Compote poire" },
       { day: "Mardi", starter: "Soupe de tomates", main: "Poisson pané, purée", dessert: "Crème caramel" },
@@ -30,7 +30,7 @@ const menuWeeks = [
     ]
   },
   {
-    title: "Semaine 4 — du lundi 18 mai au vendredi 22 mai",
+    title: "Semaine 18 mai → 22 mai",
     days: [
       { day: "Lundi", starter: "Concombres", main: "Rôti de dinde, gratin", dessert: "Pêche" },
       { day: "Mardi", starter: "Potage maison", main: "Saumon, pâtes", dessert: "Flan chocolat" },
@@ -40,7 +40,7 @@ const menuWeeks = [
     ]
   },
   {
-    title: "Semaine 5 — du lundi 25 mai au vendredi 29 mai",
+    title: "Semaine 25 mai → 29 mai",
     days: [
       { day: "Lundi", starter: "Tomates", main: "Poulet sauce légère, riz", dessert: "Compote" },
       { day: "Mardi", starter: "Velouté", main: "Colin, pommes vapeur", dessert: "Banane" },
@@ -97,13 +97,3 @@ function previousDay() {
 }
 
 document.addEventListener("DOMContentLoaded", renderMenuDay);
-
-function toggleForm() {
-  const form = document.getElementById("editForm");
-
-  if (form.style.display === "none" || form.style.display === "") {
-    form.style.display = "block";
-  } else {
-    form.style.display = "none";
-  }
-}
