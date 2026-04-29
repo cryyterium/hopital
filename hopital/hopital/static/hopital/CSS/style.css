@@ -30,7 +30,7 @@ img{
   margin:0 auto;
 }
 
-/* navbar */
+
 .navbar{
   position:sticky;
   top:0;
@@ -82,7 +82,7 @@ img{
   gap:12px;
 }
 
-/* buttons */
+
 .btn{
   display:inline-flex;
   align-items:center;
@@ -123,7 +123,7 @@ img{
   background:#dfe9e5;
 }
 
-/* small page links */
+
 .page-tools{
   display:flex;
   justify-content:flex-end;
@@ -142,7 +142,7 @@ img{
   text-decoration:underline;
 }
 
-/* hero */
+
 .hero-banner{
   position:relative;
   min-height:76vh;
@@ -186,7 +186,7 @@ img{
   max-width:620px;
 }
 
-/* generic */
+
 .tag{
   display:inline-block;
   padding:8px 14px;
@@ -237,7 +237,7 @@ img{
   font-size:1.02rem;
 }
 
-/* top stats */
+
 .hero-stats-section{
   padding-top:34px;
 }
@@ -270,7 +270,7 @@ img{
   color:#1f2926;
 }
 
-/* cards */
+
 .feature-grid,
 .service-grid,
 .news-grid,
@@ -353,7 +353,6 @@ img{
   margin-bottom:14px;
 }
 
-/* resources */
 .resource-grid{
   display:grid;
   grid-template-columns:1.3fr 1fr 1fr 1fr;
@@ -382,7 +381,7 @@ img{
   margin-bottom:8px;
 }
 
-/* menu slider */
+
 .menu-slider-header{
   display:flex;
   justify-content:space-between;
@@ -440,7 +439,6 @@ img{
   color:#1f2926;
 }
 
-/* cta */
 .cta-section{
   padding-top:30px;
 }
@@ -467,7 +465,7 @@ img{
   max-width:700px;
 }
 
-/* footer */
+
 .footer{
   padding:32px 0;
   margin-top:56px;
@@ -491,11 +489,14 @@ img{
   color:#687670;
 }
 
+
+
 .footer-links{
   display:flex;
   gap:20px;
   flex-wrap:wrap;
 }
+
 
 .footer-links a{
   color:#46534f;
@@ -505,7 +506,6 @@ img{
   color:#3f6d62;
 }
 
-/* auth */
 .auth-page{
   min-height:calc(100vh - 92px);
   display:flex;
@@ -588,7 +588,9 @@ img{
   text-decoration:underline;
 }
 
-/* dashboard */
+
+
+
 .dashboard-page{
   padding:34px 0 70px;
 }
@@ -703,7 +705,6 @@ img{
   background:#edf4f1;
 }
 
-/* profile */
 .profile-header{
   display:flex;
   align-items:center;
@@ -758,7 +759,10 @@ img{
   flex-wrap:wrap;
 }
 
-/* objects / rooms */
+
+
+
+
 .objects-top{
   margin-bottom:22px;
 }
@@ -852,7 +856,9 @@ img{
   color:#666;
 }
 
-/* manage / admin / stats */
+
+
+
 .manage-grid{
   display:grid;
   grid-template-columns:1fr 1fr;
@@ -912,7 +918,10 @@ img{
   font-size:14px;
 }
 
-/* responsive */
+
+
+
+
 @media (max-width: 1100px){
   .stats-grid,
   .feature-grid,
