@@ -152,6 +152,8 @@ def profile(request):
 
 @login_required
 def objects(request):
+    profil, created = Profil.objects.get_or_create(user=request.user)
+    
     objets = ObjetConnecte.objects.all()
     salles = Salle.objects.all()
 
@@ -174,7 +176,7 @@ def objects(request):
     if salle:
         objets = objets.filter(salle_id=salle)
 
-    return render(request, 'hopital/objects.html', {'objets': objets,"salles": salles})
+    return render(request, 'hopital/objects.html', {'objets': objets,"salles": salles,"profil": profil})
 
 @login_required
 def room(request):
@@ -202,8 +204,43 @@ def admin_page(request):
 def manage_users(request):
     return render(request, 'hopital/manage-users.html')
 
+@login_required
 def manage_objects(request):
-    return render(request, 'hopital/manage-objects.html')
+    profil = Profil.objects.get(user=request.user)
+
+    # sécurité
+    if profil.niveau not in ["avancé", "expert"]:
+        return redirect("objects")
+
+    salles = Salle.objects.all()
+    objets = ObjetConnecte.objects.order_by("-id")
+
+    if request.method == "POST":
+        action = request.POST.get("action")
+
+        if action == "add":
+            ObjetConnecte.objects.create(
+                nom=request.POST.get("nom"),
+                type=request.POST.get("type"),
+                etat=request.POST.get("etat"),
+                salle_id=request.POST.get("salle")
+            )
+
+        elif action == "edit":
+            objet = ObjetConnecte.objects.get(id=request.POST.get("objet_id"))
+            objet.nom = request.POST.get("nom")
+            objet.type = request.POST.get("type")
+            objet.etat = request.POST.get("etat")
+            objet.salle_id = request.POST.get("salle")
+            objet.save()
+
+        elif action == "delete":
+            objet = ObjetConnecte.objects.get(id=request.POST.get("objet_id"))
+            objet.delete()
+
+        return redirect("manage_objects")
+
+    return render(request, "hopital/manage-objects.html", {"salles": salles,"objets": objets})
 
 def stats(request):
     return render(request, 'hopital/stats.html')

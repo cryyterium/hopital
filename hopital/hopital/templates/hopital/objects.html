@@ -32,15 +32,23 @@
       <a href="{% url 'login' %}">Déconnexion</a>
     </div>
 
-    <section class="objects-top">
-      <div>
+
+    <section class="objects-top objects-header">
+      
+      <div class="objects-text">
         <span class="tag">Recherche et consultation</span>
         <h1>Objets connectés</h1>
         <p>
-          Consultez les objets enregistrés sur la plateforme et utilisez
-          les filtres pour affiner la recherche.
+          Consultez les objets enregistrés sur la plateforme et utilisez les filtres pour affiner la recherche.
         </p>
       </div>
+
+      {% if profil.niveau == "avancé" or profil.niveau == "expert" %}
+        <a href="{% url 'manage_objects' %}" class="btn btn-primary manage-btn">
+          Gérer les objets
+        </a>
+      {% endif %}
+
     </section>
 
     <form method="GET" class="filters-box">
@@ -81,6 +89,8 @@
           <option value="">Toutes</option>
           {% for salle in salles %}
             <option value="{{ salle.id }}" {% if request.GET.salle == salle.id|stringformat:"s" %}selected{% endif %}>
+              {{ salle.nom }}
+            </option>
           {% endfor %}
         </select>
       </div>
@@ -88,9 +98,9 @@
       <div class="filter-item filter-button">
         <button type="submit" class="btn btn-primary">Filtrer</button>
       </div>
-    </form>
 
-        
+    </form>
+  
 
     <section class="object-grid">
       {% for objet in objets %}

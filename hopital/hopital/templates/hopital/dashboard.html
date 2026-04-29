@@ -131,22 +131,22 @@
   </div>
 
   <div class="level-grid">
-    <div class="level-card active-level">
+    <div class="level-card {% if request.user.profil.niveau == 'débutant' %}active-level{% endif %}">
       <h3>Débutant</h3>
       <p>Consultation simple de la plateforme et découverte des objets connectés.</p>
     </div>
 
-    <div class="level-card">
+    <div class="level-card {% if request.user.profil.niveau == 'intermediaire' %}active-level{% endif %}">
       <h3>Intermédiaire</h3>
       <p>Consultation plus autonome avec meilleure maîtrise des outils proposés.</p>
     </div>
 
-    <div class="level-card">
+    <div class="level-card {% if request.user.profil.niveau == 'avancé' %}active-level{% endif %}">
       <h3>Avancé</h3>
       <p>Accès au module Gestion avec davantage de responsabilités techniques.</p>
     </div>
 
-    <div class="level-card">
+    <div class="level-card {% if request.user.profil.niveau == 'expert' %}active-level{% endif %}">
       <h3>Expert</h3>
       <p>Accès au module Administration et supervision globale de la plateforme.</p>
     </div>

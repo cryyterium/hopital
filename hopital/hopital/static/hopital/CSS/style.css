@@ -1104,6 +1104,41 @@ img{
     font-size: 14px !important;
     flex: 0 0 auto !important;
   }
+
   
 }
- 
+
+.objects-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.objects-top-row .btn {
+  margin-top: 40px;
+  white-space: nowrap;
+}
+
+.objects-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.objects-text {
+  max-width: 70%;
+}
+
+.manage-btn {
+  margin-top: 10px;
+}
+
+.objects-header {
+  align-items: center;
+}
+.objects-scroll {
+  max-height: 420px;
+  overflow-y: auto;
+  padding-right: 8px;
+}

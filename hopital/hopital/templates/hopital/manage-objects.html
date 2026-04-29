@@ -20,6 +20,7 @@
       <a href="{% url 'objects' %}">Objets</a>
       <a href="{% url 'room' %}">Salles</a>
       <a href="{% url 'manage_objects' %}">Gestion objets</a>
+      <a href="{% url 'profile' %}">Profil</a>
     </nav>
   </div>
 </header>
@@ -40,37 +41,35 @@
       </p>
     </section>
 
-    <p class="access-note">
-      Accès réservé aux utilisateurs avancés ou administrateurs.
-    </p>
-
     <section class="manage-grid">
       <div class="profile-card">
         <h2>Ajouter un objet</h2>
-        <form class="auth-form">
-          <label for="obj-name">Nom</label>
-          <input id="obj-name" type="text" placeholder="Nom de l'objet">
+        <form method="POST" class="auth-form">
+          {% csrf_token %}
+          <input type="hidden" name="action" value="add">
 
-          <label for="obj-type">Type</label>
-          <select id="obj-type">
-            <option>Lit connecté</option>
-            <option>Moniteur cardiaque</option>
-            <option>Capteur température</option>
-            <option>Caméra</option>
+          <label>Nom</label>
+          <input name="nom" type="text" required>
+
+          <label>Type</label>
+          <select name="type">
+            <option value="capteur">Capteur</option>
+            <option value="pompe">Pompe</option>
+            <option value="moniteur">Moniteur</option>
           </select>
 
-          <label for="obj-room">Salle</label>
-          <select id="obj-room">
-            <option>Chambre 101</option>
-            <option>Chambre 204</option>
-            <option>Bloc A</option>
+          <label>Salle</label>
+          <select name="salle">
+            {% for salle in salles %}
+              <option value="{{ salle.id }}">{{ salle.nom }}</option>
+            {% endfor %}
           </select>
 
-          <label for="obj-state">État</label>
-          <select id="obj-state">
-            <option>Actif</option>
-            <option>Inactif</option>
-            <option>Maintenance</option>
+          <label>État</label>
+          <select name="etat">
+            <option value="actif">Actif</option>
+            <option value="inactif">Inactif</option>
+            <option value="maintenance">Maintenance</option>
           </select>
 
           <button class="btn btn-primary" type="submit">Ajouter</button>
@@ -78,24 +77,65 @@
       </div>
 
       <div class="profile-card">
-        <h2>Objets récents</h2>
-        <div class="mini-list">
-          <div class="mini-row">
-            <span>Lit connecté 101</span>
-            <span class="status active">Actif</span>
-          </div>
-          <div class="mini-row">
-            <span>Moniteur 204</span>
-            <span class="status active">Actif</span>
-          </div>
-          <div class="mini-row">
-            <span>Caméra urgences</span>
-            <span class="status inactive">Inactif</span>
-          </div>
-          <div class="mini-row">
-            <span>Capteur bloc A</span>
-            <span class="status warning">Surveillance</span>
-          </div>
+        <h2>Tous les objets</h2>
+        <div class="mini-list objects-scroll">
+          {% for objet in objets %}
+
+            <div class="mini-row">
+              <span>{{ objet.nom }}</span>
+              <span class="status {{ objet.etat }}">{{ objet.etat }}</span>
+
+              <button type="button" class="btn btn-secondary" onclick="showEditForm('{{ objet.id }}')">
+                Modifier
+              </button>
+
+              <form method="POST" style="display:inline;">
+                {% csrf_token %}
+                <input type="hidden" name="action" value="delete">
+                <input type="hidden" name="objet_id" value="{{ objet.id }}">
+                <button type="submit" class="btn btn-light" onclick="return confirm('Supprimer cet objet ?')">
+                  Supprimer
+                </button>
+              </form>
+            </div>
+
+            <form method="POST" id="edit-form-{{ objet.id }}" class="auth-form" style="display:none; margin:15px 0;">
+              {% csrf_token %}
+              <input type="hidden" name="action" value="edit">
+              <input type="hidden" name="objet_id" value="{{ objet.id }}">
+
+              <label>Nom</label>
+              <input type="text" name="nom" value="{{ objet.nom }}">
+
+              <label>Type</label>
+              <select name="type">
+                <option value="capteur" {% if objet.type == "capteur" %}selected{% endif %}>Capteur</option>
+                <option value="pompe" {% if objet.type == "pompe" %}selected{% endif %}>Pompe</option>
+                <option value="moniteur" {% if objet.type == "moniteur" %}selected{% endif %}>Moniteur</option>
+              </select>
+
+              <label>Salle</label>
+              <select name="salle">
+                {% for salle in salles %}
+                  <option value="{{ salle.id }}" {% if objet.salle.id == salle.id %}selected{% endif %}>
+                    {{ salle.nom }}
+                  </option>
+                {% endfor %}
+              </select>
+
+              <label>État</label>
+              <select name="etat">
+                <option value="actif" {% if objet.etat == "actif" %}selected{% endif %}>Actif</option>
+                <option value="inactif" {% if objet.etat == "inactif" %}selected{% endif %}>Inactif</option>
+                <option value="maintenance" {% if objet.etat == "maintenance" %}selected{% endif %}>Maintenance</option>
+              </select>
+
+              <button type="submit" class="btn btn-primary">Enregistrer</button>
+            </form>
+
+          {% empty %}
+            <p>Aucun objet.</p>
+          {% endfor %}
         </div>
       </div>
     </section>
@@ -125,6 +165,13 @@
     </section>
   </div>
 </main>
+
+<script>
+function showEditForm(id) {
+  const form = document.getElementById("edit-form-" + id);
+  form.style.display = form.style.display === "none" ? "block" : "none";
+}
+</script>
 
 </body>
 </html>
